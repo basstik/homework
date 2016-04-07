@@ -29,8 +29,21 @@ public class UserDTO {
     
     private boolean admin;
     
-    private List<MobileDTO> cart;
+    private List<MobileDTO> mobileList;
 
+
+    public UserDTO(String username, String password, String firstName, String lastname, Date dateOfBirth, Date registrationDate, boolean admin) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastname = lastname;
+        this.dateOfBirth = dateOfBirth;
+        this.registrationDate = registrationDate;
+        this.admin = admin;
+    }
+
+    
+    
     public String getUsername() {
         return username;
     }
@@ -86,15 +99,14 @@ public class UserDTO {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
-
+  
     public List<MobileDTO> getCart() {
-        return cart;
+        return mobileList;
     }
 
-    public void setCart(List<MobileDTO> cart) {
-        this.cart = cart;
+    public Integer addMobile(MobileDTO mobile) {
+        mobileList.add(mobile);
+        return mobileList.size();
     }
-    
-    
           
 }

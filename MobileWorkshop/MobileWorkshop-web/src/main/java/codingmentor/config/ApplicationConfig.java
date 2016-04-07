@@ -1,5 +1,8 @@
 package codingmentor.config;
 
+import codingmentor.config.service.CartRESTService;
+import codingmentor.config.service.InventoryRESTService;
+import codingmentor.config.service.UserRESTService;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +16,10 @@ public class ApplicationConfig extends Application {
 
     public ApplicationConfig() {
         HashSet<Class<?>> c = new HashSet<>();
-        //c.add(HelloREST.class);
+        c.add(CartRESTService.class);
+        c.add(InventoryRESTService.class);
+        c.add(UserRESTService.class);
+        //add Mapper-s
 
         classes = Collections.unmodifiableSet(c);
     }
