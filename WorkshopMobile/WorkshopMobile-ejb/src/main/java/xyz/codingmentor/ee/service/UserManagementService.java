@@ -21,7 +21,6 @@ import xyz.codingmentor.ee.dto.UserDTO;
 @Singleton
 @LocalBean
 @Startup
-@ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class UserManagementService {
 
     private List<UserDTO> userList = new ArrayList<>();

@@ -15,9 +15,8 @@ import javax.ejb.Startup;
 import xyz.codingmentor.ee.dto.MobileDTO;
 
 @Singleton
-@LocalBean      //Ez kell ide!!! De mit jelent??? NE felejsem el megnézni!!!!!!!!!!!!!
+@LocalBean      
 @Startup
-@ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class InventoryService {
 
     private List<MobileDTO> mobilList = new ArrayList<>();
