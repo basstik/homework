@@ -1,9 +1,0 @@
-/home/basstik/NetBeansProjects/WorkshopMobile/WorkshopMobile-ejb/src/main/java/xyz/codingmentor/ee/service/InventoryService.java
-/home/basstik/NetBeansProjects/WorkshopMobile/WorkshopMobile-ejb/src/main/java/xyz/codingmentor/ee/dto/constraints/RegistrationAfterBirthdayValidator.java
-/home/basstik/NetBeansProjects/WorkshopMobile/WorkshopMobile-ejb/src/main/java/xyz/codingmentor/ee/dto/MobileDTO.java
-/home/basstik/NetBeansProjects/WorkshopMobile/WorkshopMobile-ejb/src/main/java/xyz/codingmentor/ee/service/CartService.java
-/home/basstik/NetBeansProjects/WorkshopMobile/WorkshopMobile-ejb/src/main/java/xyz/codingmentor/ee/dto/constraints/RegistrationAfterBirthdayConstraint.java
-/home/basstik/NetBeansProjects/WorkshopMobile/WorkshopMobile-ejb/src/main/java/xyz/codingmentor/ee/annotation/Validate.java
-/home/basstik/NetBeansProjects/WorkshopMobile/WorkshopMobile-ejb/src/main/java/xyz/codingmentor/ee/dto/UserDTO.java
-/home/basstik/NetBeansProjects/WorkshopMobile/WorkshopMobile-ejb/src/main/java/xyz/codingmentor/ee/interceptor/BeanValidation.java
-/home/basstik/NetBeansProjects/WorkshopMobile/WorkshopMobile-ejb/src/main/java/xyz/codingmentor/ee/service/UserManagementService.java
