@@ -24,8 +24,8 @@ public class InventoryRESTService {
     
     @GET
     public Collection<MobileDTO> getMobiles(){
-        //return inventoryService.getMobilesList();
-        return new ArrayList<>();
+        return inventoryService.getMobilesList();
+        //return new ArrayList<>();
     }
     
     @POST
