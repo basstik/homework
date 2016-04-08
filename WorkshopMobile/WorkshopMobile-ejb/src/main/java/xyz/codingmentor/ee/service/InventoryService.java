@@ -1,12 +1,11 @@
 package xyz.codingmentor.ee.service;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.ejb.ConcurrencyManagement;
-import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.LocalBean;
 import javax.ejb.Lock;
 import javax.ejb.LockType;
@@ -17,7 +16,7 @@ import xyz.codingmentor.ee.dto.MobileDTO;
 @Singleton
 @LocalBean      
 @Startup
-public class InventoryService {
+public class InventoryService implements Serializable{
 
     private List<MobileDTO> mobilList = new ArrayList<>();
 
@@ -26,8 +25,8 @@ public class InventoryService {
     private void init() {
          mobilList.add(new MobileDTO("3310","Nokia",5000,3));
          mobilList.add(new MobileDTO("Galaxy S3","Samsung",34500,12));
-        //mobilList.add(new MobileDTO("S5-S5","Apple",10000,5));
-        //mobilList.add(new MobileDTO("P8-P8","Hauwei",49900,0));
+         mobilList.add(new MobileDTO("S5-S5","Apple",10000,5));
+         mobilList.add(new MobileDTO("P8-P8","Hauwei",49900,0));
     }
 
     @Lock(LockType.WRITE)

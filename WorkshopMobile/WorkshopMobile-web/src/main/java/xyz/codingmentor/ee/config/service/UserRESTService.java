@@ -30,6 +30,7 @@ public class UserRESTService {
     private UserManagementService userMgmtService;
     
     @POST
+    @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     public UserDTO addUsert(UserDTO user) {
         return userMgmtService.addUser(user);
@@ -37,14 +38,15 @@ public class UserRESTService {
     
     @DELETE
     @Path("/{username}")
-    public int deleteUser(@PathParam("username") String username) {
-        return userMgmtService.deleteUserByName(username);
+    @Produces(MediaType.APPLICATION_JSON)
+    public Integer deleteUser(@PathParam("username") String username) {
+       userMgmtService.deleteUserByName(username);
+       return 1;
     }
     
     @PUT
-    @Path("/{userName}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public UserDTO editUser(@PathParam("userName") String username, UserDTO user) {
+    @Path("/{username}")
+    public UserDTO editUser(@PathParam("username") String username, UserDTO user) {
         if (!user.getUsername().equals(username)) {
             throw new IdNotMatchException("Username error");
         }
@@ -58,6 +60,7 @@ public class UserRESTService {
     }
     
     @GET
+    @Path("/")
     public Collection<UserDTO> getUsers() {
         return userMgmtService.getUsers();
     }
@@ -70,9 +73,11 @@ public class UserRESTService {
     public boolean login(@Context HttpServletRequest request, 
             @PathParam("username") String username, 
             @PathParam("password") String password ) {
-        HttpSession session = null;
+       
         for (UserDTO acceptedUser : userMgmtService.getUsers()) {
-            if (acceptedUser.getUsername().equals(username)) {
+            if (acceptedUser.getUsername().equals(username)&& 
+                    acceptedUser.getPassword().equals(password)) {
+                HttpSession session;
                 session = request.getSession(true);
                 session.setMaxInactiveInterval(300);
                 session.setAttribute(username, acceptedUser);

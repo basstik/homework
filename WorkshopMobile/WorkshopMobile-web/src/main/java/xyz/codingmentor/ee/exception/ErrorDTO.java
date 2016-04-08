@@ -6,6 +6,7 @@ public class ErrorDTO {
     private String errorMessage;
 
     public ErrorDTO() {
+        //default constructor
     }
 
     public ErrorDTO(String errorMessage) {

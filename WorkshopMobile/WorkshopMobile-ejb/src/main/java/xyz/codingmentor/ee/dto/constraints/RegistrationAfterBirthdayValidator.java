@@ -10,6 +10,7 @@ public class RegistrationAfterBirthdayValidator implements
 
     @Override
     public void initialize(RegistrationAfterBirthdayConstraint constraintAnnotation) {
+        //it isn't used
     }
 
     @Override

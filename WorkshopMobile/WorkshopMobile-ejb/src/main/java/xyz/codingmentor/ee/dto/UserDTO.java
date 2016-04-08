@@ -1,6 +1,7 @@
 package xyz.codingmentor.ee.dto;
 
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.validation.constraints.NotNull;
@@ -10,7 +11,7 @@ import xyz.codingmentor.ee.dto.constraints.RegistrationAfterBirthdayConstraint;
 
 @Validate
 @RegistrationAfterBirthdayConstraint
-public class UserDTO {
+public class UserDTO implements Serializable{
 
     //this is the id of User
     @NotNull
@@ -33,7 +34,11 @@ public class UserDTO {
     
     private List<MobileDTO> mobileList;
 
+    public UserDTO() {
+        //empty default contructor for REST API
+    }
 
+    
     public UserDTO(String username, String password, String firstName, String lastname, Date dateOfBirth, Date registrationDate, boolean admin) {
         this.username = username;
         this.password = password;

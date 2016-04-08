@@ -1,5 +1,6 @@
 package xyz.codingmentor.ee.service;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,8 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
-import javax.ejb.Lock;
-import javax.ejb.LockType;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import xyz.codingmentor.ee.dto.UserDTO;
@@ -19,7 +18,7 @@ import xyz.codingmentor.ee.dto.UserDTO;
 @Singleton
 @LocalBean
 @Startup
-public class UserManagementService {
+public class UserManagementService implements Serializable{
 
     private List<UserDTO> userList = new ArrayList<>();
 
@@ -31,10 +30,10 @@ public class UserManagementService {
         try {
             regDate = sdf.parse("21/12/2012");
             birthDay = sdf.parse("01/01/1992");
-            userList.add(new UserDTO("admin", "admin", "firstName",
+            userList.add(new UserDTO("admin", "adminABC123", "firstName",
                     "lastName", birthDay, regDate, true));
             
-            userList.add(new UserDTO("demo", "demo", "firstName",
+            userList.add(new UserDTO("demo", "demoABC123", "firstName",
                     "lastName", birthDay, regDate, false));
         } catch (ParseException ex) {
             Logger.getLogger(UserManagementService.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,21 +46,21 @@ public class UserManagementService {
     }
 
 
-    public int removeUser(UserDTO user) {
-        boolean wasPresent = userList.remove(user);
-        if (wasPresent == true) {
+    public Integer removeUser(UserDTO user) {
+        if(userList.contains(user)){
+            userList.remove(user);
             return 1;
         }
-        throw new IllegalArgumentException("no such username");
+        return -1;
     }
 
-    public int deleteUserByName(String username) {
+    public Integer deleteUserByName(String username) {
         for (UserDTO user : userList) {
             if (user.getUsername().equals(username)) {
                 return removeUser(user);
             }
         }
-        throw new IllegalArgumentException("no such username");
+        return -1;
     }
 
     public UserDTO getUser(String userName) {

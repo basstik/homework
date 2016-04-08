@@ -1,6 +1,7 @@
 package xyz.codingmentor.ee.dto;
 
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 import javax.validation.constraints.Min;
@@ -9,7 +10,7 @@ import javax.validation.constraints.Pattern;
 import xyz.codingmentor.ee.annotation.Validate;
 
 @Validate
-public class MobileDTO {
+public class MobileDTO implements Serializable{
 
     private String id;
 
@@ -36,6 +37,11 @@ public class MobileDTO {
         this.piece = piece;
         this.id= UUID.randomUUID().toString();
     }
+
+    public MobileDTO() {
+        // Default conctruktor for REST API
+    }
+    
     
 
     public String getId() {

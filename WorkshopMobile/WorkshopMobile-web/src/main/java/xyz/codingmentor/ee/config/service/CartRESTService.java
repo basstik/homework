@@ -13,7 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import xyz.codingmentor.ee.dto.MobileDTO;
-import xyz.codingmentor.ee.dto.UserDTO;
 import xyz.codingmentor.ee.interceptor.BeanValidation;
 import xyz.codingmentor.ee.service.CartService;
 import xyz.codingmentor.ee.service.InventoryService;
@@ -23,30 +22,23 @@ import xyz.codingmentor.ee.service.InventoryService;
 @Produces(MediaType.APPLICATION_JSON)
 @SessionScoped
 @BeanValidation
-public class CartRESTService implements Serializable {
+public class CartRESTService implements Serializable{
     
     @Inject
     private CartService cartService;
   
     @Inject
     private InventoryService inventoryService;
-
-    public CartRESTService() {
-    }
        
-    
+
     @POST
+    @Path("/")
     @Consumes("application/json")
     public MobileDTO addToCart(@Context HttpServletRequest request, MobileDTO mobile) {
         HttpSession session = request.getSession(true);
         session.setMaxInactiveInterval(200);
-        Object userObject = session.getAttribute("username");
-        UserDTO user;
-        if ((userObject != null) && (userObject instanceof UserDTO)) {
-            user = (UserDTO) userObject;
-            System.out.println(user.getUsername() + " add a new product to the cart");
-        }
-        
+        session.getAttribute("username");
+                
         //Verify, that the mobile is available in inventory
         //The number of available mobile will decrease by buy 
         inventoryService.mobileIsPurchasable(mobile);

@@ -1,7 +1,6 @@
 package xyz.codingmentor.ee.config.service;
 
 
-import java.util.ArrayList;
 import java.util.Collection;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -23,12 +22,13 @@ public class InventoryRESTService {
     private InventoryService inventoryService;
     
     @GET
+    @Path("/")
     public Collection<MobileDTO> getMobiles(){
         return inventoryService.getMobilesList();
-        //return new ArrayList<>();
     }
     
     @POST
+    @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     public MobileDTO addMobile(MobileDTO mobile){
         inventoryService.addMobile(mobile);
