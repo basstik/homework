@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.ejb.ConcurrencyManagement;
-import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.LocalBean;
 import javax.ejb.Lock;
 import javax.ejb.LockType;
@@ -43,14 +41,13 @@ public class UserManagementService {
         }
     }
 
-    @Lock(LockType.WRITE)
     public UserDTO addUser(UserDTO user) {
         userList.add(user);
         return user;
     }
 
 
-    public synchronized int removeUser(UserDTO user) {
+    public int removeUser(UserDTO user) {
         boolean wasPresent = userList.remove(user);
         if (wasPresent == true) {
             return 1;
@@ -58,7 +55,7 @@ public class UserManagementService {
         throw new IllegalArgumentException("no such username");
     }
 
-    public synchronized int deleteUserByName(String username) {
+    public int deleteUserByName(String username) {
         for (UserDTO user : userList) {
             if (user.getUsername().equals(username)) {
                 return removeUser(user);

@@ -17,12 +17,13 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import xyz.codingmentor.ee.dto.UserDTO;
 import xyz.codingmentor.ee.exception.IdNotMatchException;
+import xyz.codingmentor.ee.interceptor.BeanValidation;
 import xyz.codingmentor.ee.service.UserManagementService;
 
 
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
-//@BeanValidation
+@BeanValidation
 public class UserRESTService {
 
     @Inject

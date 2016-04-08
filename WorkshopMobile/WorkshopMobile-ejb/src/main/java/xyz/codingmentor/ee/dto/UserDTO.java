@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 import xyz.codingmentor.ee.annotation.Validate;
 import xyz.codingmentor.ee.dto.constraints.RegistrationAfterBirthdayConstraint;
 
-//@Validate
+@Validate
 @RegistrationAfterBirthdayConstraint
 public class UserDTO {
 

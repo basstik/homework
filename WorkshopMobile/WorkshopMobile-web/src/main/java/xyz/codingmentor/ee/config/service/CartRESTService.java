@@ -14,6 +14,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import xyz.codingmentor.ee.dto.MobileDTO;
 import xyz.codingmentor.ee.dto.UserDTO;
+import xyz.codingmentor.ee.interceptor.BeanValidation;
 import xyz.codingmentor.ee.service.CartService;
 import xyz.codingmentor.ee.service.InventoryService;
 
@@ -21,7 +22,7 @@ import xyz.codingmentor.ee.service.InventoryService;
 @Path("/cart")
 @Produces(MediaType.APPLICATION_JSON)
 @SessionScoped
-//@BeanValidation
+@BeanValidation
 public class CartRESTService implements Serializable {
     
     @Inject

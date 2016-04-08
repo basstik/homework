@@ -11,12 +11,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import xyz.codingmentor.ee.dto.MobileDTO;
+import xyz.codingmentor.ee.interceptor.BeanValidation;
 import xyz.codingmentor.ee.service.InventoryService;
 
 @Path("/mobiles")
 @Produces(MediaType.APPLICATION_JSON)
-//@Stateless        //Nincs rá szükség, by László
-//@BeanValidation
+@BeanValidation
 public class InventoryRESTService {
 
     @Inject
