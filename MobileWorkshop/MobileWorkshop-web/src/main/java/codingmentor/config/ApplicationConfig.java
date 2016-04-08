@@ -3,13 +3,16 @@ package codingmentor.config;
 import codingmentor.config.service.CartRESTService;
 import codingmentor.config.service.InventoryRESTService;
 import codingmentor.config.service.UserRESTService;
+import codingmentor.exception.GeneralExceptionMapper;
+import codingmentor.exception.IdNotMatchExceptionMapper;
+import codingmentor.exception.ValidationExceptionMapper;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@ApplicationPath("/")
+@ApplicationPath("/mobileworkshop")
 public class ApplicationConfig extends Application {
 
     private final Set<Class<?>> classes;
@@ -19,8 +22,9 @@ public class ApplicationConfig extends Application {
         c.add(CartRESTService.class);
         c.add(InventoryRESTService.class);
         c.add(UserRESTService.class);
-        //add Mapper-s
-
+        c.add(IdNotMatchExceptionMapper.class);
+        c.add(ValidationExceptionMapper.class);
+        c.add(GeneralExceptionMapper.class);
         classes = Collections.unmodifiableSet(c);
     }
 

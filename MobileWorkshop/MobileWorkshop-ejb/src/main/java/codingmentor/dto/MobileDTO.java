@@ -1,11 +1,13 @@
 package codingmentor.dto;
 
+import codingmentor.annotation.Validate;
 import java.util.Objects;
 import java.util.UUID;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@Validate
 public class MobileDTO {
 
     private String id;

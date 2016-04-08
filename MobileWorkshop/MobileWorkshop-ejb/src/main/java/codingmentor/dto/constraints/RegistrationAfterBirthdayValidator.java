@@ -5,10 +5,10 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class RegistrationAfterBirthdayValidator implements
-        ConstraintValidator<RegistrationAfterBirthday,UserDTO>{
+        ConstraintValidator<RegistrationAfterBirthdayConstraint,UserDTO>{
 
     @Override
-    public void initialize(RegistrationAfterBirthday constraintAnnotation) {
+    public void initialize(RegistrationAfterBirthdayConstraint constraintAnnotation) {
     }
 
     @Override

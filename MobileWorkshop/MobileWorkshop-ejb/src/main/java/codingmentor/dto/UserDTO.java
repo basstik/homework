@@ -1,16 +1,17 @@
 package codingmentor.dto;
 
-import codingmentor.dto.constraints.RegistrationAfterBirthday;
+import codingmentor.annotation.Validate;
+import codingmentor.dto.constraints.RegistrationAfterBirthdayConstraint;
 import java.util.Date;
 import java.util.List;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.*;
 
-
-@RegistrationAfterBirthday
+@Validate
+@RegistrationAfterBirthdayConstraint
 public class UserDTO {
 
+    //this is the id of User
     @NotNull
     @Pattern(regexp = "....*")
     private String username;

@@ -5,6 +5,7 @@ import codingmentor.dto.UserDTO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,9 +25,9 @@ import javax.ejb.Startup;
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class UserManagementService {
 
-    private List<MobileDTO> mobilList = new ArrayList<>();
     private List<UserDTO> userList = new ArrayList<>();
 
+    //Add admin/admin and demo/demo user to userlist
     @PostConstruct
     private void init() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -45,26 +46,21 @@ public class UserManagementService {
     }
 
     @Lock(LockType.WRITE)
-    public Integer addUser(UserDTO user) {
+    public UserDTO addUser(UserDTO user) {
         userList.add(user);
-        return userList.size();
+        return user;
     }
 
-    @Lock(LockType.WRITE)
-    public int addMobile(MobileDTO mobile) {
-        mobilList.add(mobile);
-        return mobilList.size();
-    }
 
     public synchronized int removeUser(UserDTO user) {
         boolean wasPresent = userList.remove(user);
         if (wasPresent == true) {
-            return userList.size();
+            return 1;
         }
         throw new IllegalArgumentException("no such username");
     }
 
-    public synchronized int removeUserByName(String username) {
+    public synchronized int deleteUserByName(String username) {
         for (UserDTO user : userList) {
             if (user.getUsername().equals(username)) {
                 return removeUser(user);
@@ -73,41 +69,25 @@ public class UserManagementService {
         throw new IllegalArgumentException("no such username");
     }
 
-    public synchronized int removeMobile(MobileDTO product) {
-        mobilList.remove(product);
-        return mobilList.size();
-    }
-
     public UserDTO getUser(String userName) {
         for (UserDTO user : userList) {
             if (user.getUsername().equals(userName)) {
                 return user;
             }
         }
-        throw new IllegalArgumentException("no such user");
+        throw new IllegalArgumentException("no such username");
     }
 
-    public MobileDTO getMobile(String id) {
-        for (MobileDTO mobile : mobilList) {
-            if (mobile.getId().equals(id)) {
-                return mobile;
-            }
-        }
-        throw new IllegalArgumentException("no such mobile");
-    }
 
     public UserDTO editUser(UserDTO user) {
-        removeUserByName(user.getUsername());
+        deleteUserByName(user.getUsername());
         addUser(user);
         return user;
     }
 
-    public List<UserDTO> getUserList() {
+    public Collection<UserDTO> getUsers() {
         return userList;
     }
 
-    public List<MobileDTO> getProductList() {
-        return mobilList;
-    }
 
 }

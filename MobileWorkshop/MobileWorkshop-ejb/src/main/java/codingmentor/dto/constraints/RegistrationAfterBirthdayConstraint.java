@@ -10,7 +10,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = RegistrationAfterBirthdayValidator.class)
 @Target(ElementType.TYPE)
 @Retention(RUNTIME)
-public @interface RegistrationAfterBirthday {
+public @interface RegistrationAfterBirthdayConstraint {
 
     String message() default "{AfterBirthday.message}";
 

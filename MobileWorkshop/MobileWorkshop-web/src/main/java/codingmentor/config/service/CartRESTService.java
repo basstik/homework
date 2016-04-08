@@ -2,9 +2,11 @@ package codingmentor.config.service;
 
 import codingmentor.dto.MobileDTO;
 import codingmentor.dto.UserDTO;
+import codingmentor.interceptor.BeanValidation;
 import codingmentor.service.CartService;
 import codingmentor.service.InventoryService;
 import codingmentor.service.UserManagementService;
+import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -20,15 +22,12 @@ import javax.ws.rs.core.MediaType;
 @Path("/cart")
 @Produces(MediaType.APPLICATION_JSON)
 @SessionScoped
-//@Interceptors(ValidatorInterceptor.class)
-public class CartRESTService {
+//@BeanValidation
+public class CartRESTService implements Serializable {
     
     @Inject
     private CartService cartService;
-
-    @Inject
-    private UserManagementService userMgmtService;
-    
+  
     @Inject
     private InventoryService inventoryService;
 
