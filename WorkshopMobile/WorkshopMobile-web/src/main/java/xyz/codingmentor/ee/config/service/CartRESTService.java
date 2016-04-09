@@ -34,20 +34,25 @@ public class CartRESTService implements Serializable{
     @POST
     @Path("/")
     @Consumes("application/json")
-    public MobileDTO addToCart(@Context HttpServletRequest request, MobileDTO mobile) {
+    public Integer addToCart(@Context HttpServletRequest request, MobileDTO mobile) {
         HttpSession session = request.getSession(true);
         session.setMaxInactiveInterval(200);
-        session.getAttribute("username");
-                
-        //Verify, that the mobile is available in inventory
-        //The number of available mobile will decrease by buy 
-        inventoryService.mobileIsPurchasable(mobile);
-        
-        //add Mobile to cart
-        cartService.addToCart(mobile);
+        Object username = session.getAttribute("username");
 
-        return mobile;
+        if (username != null && username instanceof String) {
+            
+            //Verify, that the mobile is available in inventory
+            //The number of available mobile will decrease by buy 
+            inventoryService.mobileIsPurchasable(mobile);
+
+            //add Mobile to cart
+            cartService.addToCart(mobile);
+            return 1;
+        }
+
+        return -1;
     }
+ 
     
     @POST
     @Path("/checkout")

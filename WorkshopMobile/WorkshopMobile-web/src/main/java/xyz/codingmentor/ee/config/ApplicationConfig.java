@@ -9,9 +9,9 @@ import javax.ws.rs.core.Application;
 import xyz.codingmentor.ee.config.service.CartRESTService;
 import xyz.codingmentor.ee.config.service.InventoryRESTService;
 import xyz.codingmentor.ee.config.service.UserRESTService;
-import xyz.codingmentor.ee.exception.GeneralExceptionMapper;
-import xyz.codingmentor.ee.exception.IdNotMatchExceptionMapper;
-import xyz.codingmentor.ee.exception.ValidationExceptionMapper;
+import xyz.codingmentor.ee.mappers.GeneralExceptionMapper;
+import xyz.codingmentor.ee.mappers.IdNotMatchExceptionMapper;
+import xyz.codingmentor.ee.mappers.ValidationExceptionMapper;
 
 @ApplicationPath("/mobileworkshop")
 public class ApplicationConfig extends Application {

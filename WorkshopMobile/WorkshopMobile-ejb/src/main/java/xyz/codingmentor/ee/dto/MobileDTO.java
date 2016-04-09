@@ -10,7 +10,7 @@ import javax.validation.constraints.Pattern;
 import xyz.codingmentor.ee.annotation.Validate;
 
 @Validate
-public class MobileDTO implements Serializable{
+public class MobileDTO{
 
     private String id;
 

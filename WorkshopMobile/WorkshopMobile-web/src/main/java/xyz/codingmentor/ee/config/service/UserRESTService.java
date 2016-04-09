@@ -23,34 +23,17 @@ import xyz.codingmentor.ee.service.UserManagementService;
 
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
-@BeanValidation
+//@BeanValidation
+@Consumes(MediaType.APPLICATION_JSON)
 public class UserRESTService {
 
     @Inject
     private UserManagementService userMgmtService;
     
-    @POST
+    @GET
     @Path("/")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public UserDTO addUsert(UserDTO user) {
-        return userMgmtService.addUser(user);
-    }
-    
-    @DELETE
-    @Path("/{username}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Integer deleteUser(@PathParam("username") String username) {
-       userMgmtService.deleteUserByName(username);
-       return 1;
-    }
-    
-    @PUT
-    @Path("/{username}")
-    public UserDTO editUser(@PathParam("username") String username, UserDTO user) {
-        if (!user.getUsername().equals(username)) {
-            throw new IdNotMatchException("Username error");
-        }
-        return userMgmtService.editUser(user);
+    public Collection<UserDTO> getUsers() {
+        return userMgmtService.getUsers();
     }
     
     @GET
@@ -59,38 +42,49 @@ public class UserRESTService {
         return userMgmtService.getUser(username);
     }
     
-    @GET
+    @POST
     @Path("/")
-    public Collection<UserDTO> getUsers() {
-        return userMgmtService.getUsers();
+    public UserDTO addUser(UserDTO user) {
+        return userMgmtService.addUser(user);
     }
+    
+    @DELETE
+    @Path("/{username}")
+    public UserDTO deleteUser(@PathParam("username") String username) {
+       return userMgmtService.removeUser(username);
+    }
+  
+   
+    @PUT
+    @Path("/")
+    public UserDTO editUser( UserDTO user) {
+       
+            return userMgmtService.editUser(user);
 
-
+    }
+    
     @POST
     @Path("/login")
-    @SessionScoped
-    @Consumes("application/json")
-    public boolean login(@Context HttpServletRequest request, 
-            @PathParam("username") String username, 
-            @PathParam("password") String password ) {
+    public Integer login(@Context HttpServletRequest request, 
+            UserDTO user){
        
         for (UserDTO acceptedUser : userMgmtService.getUsers()) {
-            if (acceptedUser.getUsername().equals(username)&& 
-                    acceptedUser.getPassword().equals(password)) {
+            if (acceptedUser.getUsername().equals(user.getUsername())&& 
+                    acceptedUser.getPassword().equals(user.getPassword())) {
                 HttpSession session;
                 session = request.getSession(true);
                 session.setMaxInactiveInterval(300);
-                session.setAttribute(username, acceptedUser);
-                return true;
+                session.setAttribute("username", acceptedUser.getUsername());
+                return 1;
             }
         }
-        return false;
+        return -1;
     }
     
     @POST
     @Path("/logout")
     public String logout(@Context HttpServletRequest request){
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         session.invalidate();
         return "Success invalidate this session";
     }

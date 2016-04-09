@@ -10,7 +10,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.LocalBean;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import xyz.codingmentor.ee.dto.UserDTO;
@@ -18,6 +22,7 @@ import xyz.codingmentor.ee.dto.UserDTO;
 @Singleton
 @LocalBean
 @Startup
+@ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class UserManagementService implements Serializable{
 
     private List<UserDTO> userList = new ArrayList<>();
@@ -40,29 +45,26 @@ public class UserManagementService implements Serializable{
         }
     }
 
+    @Lock(LockType.WRITE)
     public UserDTO addUser(UserDTO user) {
         userList.add(user);
         return user;
     }
 
 
-    public Integer removeUser(UserDTO user) {
-        if(userList.contains(user)){
-            userList.remove(user);
-            return 1;
-        }
-        return -1;
-    }
 
-    public Integer deleteUserByName(String username) {
+    @Lock(LockType.WRITE)
+    public UserDTO removeUser(String username) {
         for (UserDTO user : userList) {
             if (user.getUsername().equals(username)) {
-                return removeUser(user);
+                userList.remove(user);
+                return user;
             }
         }
-        return -1;
+        throw new IllegalArgumentException("no such username");
     }
 
+    @Lock(LockType.READ)
     public UserDTO getUser(String userName) {
         for (UserDTO user : userList) {
             if (user.getUsername().equals(userName)) {
@@ -72,13 +74,14 @@ public class UserManagementService implements Serializable{
         throw new IllegalArgumentException("no such username");
     }
 
-
+    @Lock(LockType.WRITE)
     public UserDTO editUser(UserDTO user) {
-        deleteUserByName(user.getUsername());
+        removeUser(user.getUsername());
         addUser(user);
         return user;
     }
 
+    @Lock(LockType.READ)
     public Collection<UserDTO> getUsers() {
         return userList;
     }
