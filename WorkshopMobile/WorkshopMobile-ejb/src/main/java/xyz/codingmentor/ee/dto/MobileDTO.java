@@ -41,6 +41,14 @@ public class MobileDTO{
     public MobileDTO() {
         // Default conctruktor for REST API
     }
+
+    public MobileDTO(String iPhone_5SE, String apple, String toString, int i, int i0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     
     
 
