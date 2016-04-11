@@ -24,11 +24,16 @@ import xyz.codingmentor.ee.interceptor.BeanValidation;
 @LocalBean
 @Startup
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
-@BeanValidation
 public class UserManagementService implements Serializable{
 
     private List<UserDTO> userList = new ArrayList<>();
 
+    public UserManagementService() {
+        //default constuctor, because it is Bean class
+    }
+
+    
+    
     //Add admin/admin and demo/demo user to userlist
     @PostConstruct
     private void init() {

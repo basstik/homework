@@ -4,6 +4,7 @@ package xyz.codingmentor.ee.interceptor;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
@@ -20,7 +21,10 @@ public class ValidatorInterceptor {
 
     @Inject
     private Validator validator;
+    
+    private static final Logger LOG = Logger.getLogger(ValidatorInterceptor.class.getName());
 
+    
     @AroundInvoke
     public Object logMethod(InvocationContext ic) throws Exception {
         validateParameters(ic.getParameters());
@@ -28,9 +32,14 @@ public class ValidatorInterceptor {
     }
 
     private void validateParameters(Object[] parameters) {
+        
         Arrays.asList(parameters).stream().filter(p -> 
                 p.getClass().isAnnotationPresent(Validate.class)).
                 forEach(this::validateBean);
+        
+        for (Object parameter : parameters) {
+           LOG.info(parameter.getClass().toString());
+        }
     }
 
     private void validateBean(Object o) {

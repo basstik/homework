@@ -24,7 +24,6 @@ import xyz.codingmentor.ee.service.UserManagementService;
 
 
 @Path("/users")
-@Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @BeanValidation
 public class UserRESTService implements Serializable{
@@ -35,24 +34,28 @@ public class UserRESTService implements Serializable{
     //http://localhost:8080/WorkshopMobile-web/mobileworkshop/users
     @GET
     @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
     public Collection<UserDTO> getUsers() {
         return userMgmtService.getUsers();
     }
     
     @GET
     @Path("/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
     public UserDTO getUser(@PathParam("username") String username) {
         return userMgmtService.getUser(username);
     }
     
     @POST
     @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
     public UserDTO addUser(UserDTO user) {
         return userMgmtService.addUser(user);
     }
     
     @DELETE
     @Path("/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
     public UserDTO deleteUser(@PathParam("username") String username) {
        return userMgmtService.removeUser(username);
     }
@@ -60,10 +63,9 @@ public class UserRESTService implements Serializable{
    
     @PUT
     @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
     public UserDTO editUser( UserDTO user) {
-       
             return userMgmtService.editUser(user);
-
     }
     
     @POST
@@ -85,14 +87,13 @@ public class UserRESTService implements Serializable{
         throw new IllegalArgumentException("Isn't this username");
     }
     
-    //http://localhost:8080/WorkshopMobile-web/mobileworkshop/users/logout
     @POST
     @Path("/logout")
+    @Produces(MediaType.TEXT_PLAIN)
     public Response logout(@Context HttpServletRequest request){
-        //HttpSession session = request.getSession(true);
-        //System.out.println(session.getId());
-        //session.invalidate();
-       // return "success logout";
+        HttpSession session = request.getSession(false);
+        System.out.println(session.getId());
+        session.invalidate();
         return Response.ok("success logout").build();
     }
 }

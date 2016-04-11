@@ -20,7 +20,6 @@ import xyz.codingmentor.ee.service.InventoryService;
 
 @Path("/cart")
 @Produces(MediaType.APPLICATION_JSON)
-@SessionScoped
 @BeanValidation
 public class CartRESTService implements Serializable{
     
@@ -33,7 +32,7 @@ public class CartRESTService implements Serializable{
 
     @POST
     @Path("/")
-    @Consumes("application/json")
+    @Produces(MediaType.TEXT_PLAIN)
     public Integer addToCart(@Context HttpServletRequest request, MobileDTO mobile) {
         HttpSession session = request.getSession(true);
         session.setMaxInactiveInterval(200);
@@ -56,8 +55,10 @@ public class CartRESTService implements Serializable{
     
     @POST
     @Path("/checkout")
-    public void checkout(@Context HttpServletRequest request) {
+    @Produces(MediaType.TEXT_HTML)
+    public Integer checkout(@Context HttpServletRequest request) {
         cartService.checkout();
         request.getSession().invalidate();
+        return 1;
     }
 }

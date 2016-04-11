@@ -15,13 +15,12 @@ import xyz.codingmentor.ee.interceptor.BeanValidation;
 @Stateful
 @StatefulTimeout(value = 20, unit = TimeUnit.SECONDS)
 @LocalBean
-@BeanValidation
 public class CartService implements Serializable{
  
     private final List<MobileDTO> mobilList = new ArrayList<>();
 
     public CartService() {
-        //default constuctor
+        //default constuctor, because it is Bean class
     }
 
     public Integer addToCart(MobileDTO mobile) {

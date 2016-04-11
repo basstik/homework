@@ -17,17 +17,20 @@ import xyz.codingmentor.ee.interceptor.BeanValidation;
 @Singleton
 @LocalBean      
 @Startup
-@BeanValidation
 public class InventoryService implements Serializable{
 
     private List<MobileDTO> mobilList = new ArrayList<>();
 
-
+    public InventoryService() {
+        //default constuctor, because it is Bean class
+    }
+    
+       
     @PostConstruct
     private void init() {
          mobilList.add(new MobileDTO("3310","Nokia",5000,3));
          mobilList.add(new MobileDTO("Galaxy S3","Samsung",34500,12));
-         mobilList.add(new MobileDTO("S5-S5","Apple",10000,5));
+         mobilList.add(new MobileDTO("S","Apple",10000,5));
          mobilList.add(new MobileDTO("P8-P8","Hauwei",49900,0));
     }
 

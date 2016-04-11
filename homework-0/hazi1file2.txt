@@ -1,5 +1,0 @@
-Csak hogy 2 fájl legyen
-
-itt lesz egy funtion
-
-itt pedig a main fg

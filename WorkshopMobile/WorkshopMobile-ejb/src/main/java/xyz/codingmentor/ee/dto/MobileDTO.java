@@ -11,7 +11,6 @@ import xyz.codingmentor.ee.annotation.Validate;
 import xyz.codingmentor.ee.interceptor.BeanValidation;
 
 @Validate
-@BeanValidation
 public class MobileDTO implements Serializable{
 
     private String id;

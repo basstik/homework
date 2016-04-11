@@ -1,6 +1,5 @@
 package xyz.codingmentor.ee.config.service;
 
-
 import java.util.Collection;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -14,27 +13,26 @@ import xyz.codingmentor.ee.interceptor.BeanValidation;
 import xyz.codingmentor.ee.service.InventoryService;
 
 @Path("/mobiles")
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @BeanValidation
 public class InventoryRESTService {
 
     @Inject
     private InventoryService inventoryService;
-    
+
     @GET
     @Path("/")
-    public Collection<MobileDTO> getMobiles(){
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<MobileDTO> getMobiles() {
         return inventoryService.getMobilesList();
     }
-    
+
     @POST
     @Path("/")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public MobileDTO addMobile(MobileDTO mobile){
+    @Produces(MediaType.APPLICATION_JSON)
+    public MobileDTO addMobile(MobileDTO mobile) {
         inventoryService.addMobile(mobile);
         return mobile;
     }
-    
 
-    
 }
