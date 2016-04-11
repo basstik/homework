@@ -85,6 +85,7 @@ public class UserRESTService implements Serializable{
         throw new IllegalArgumentException("Isn't this username");
     }
     
+    //http://localhost:8080/WorkshopMobile-web/mobileworkshop/users/logout
     @POST
     @Path("/logout")
     public Response logout(@Context HttpServletRequest request){
