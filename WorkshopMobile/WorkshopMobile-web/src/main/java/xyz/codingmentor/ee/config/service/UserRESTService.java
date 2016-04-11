@@ -2,7 +2,6 @@ package xyz.codingmentor.ee.config.service;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,7 +17,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import xyz.codingmentor.ee.dto.UserDTO;
-import xyz.codingmentor.ee.exception.IdNotMatchException;
 import xyz.codingmentor.ee.interceptor.BeanValidation;
 import xyz.codingmentor.ee.service.UserManagementService;
 
@@ -79,8 +77,7 @@ public class UserRESTService implements Serializable{
                 HttpSession session;
                 session = request.getSession(true);
                 session.setMaxInactiveInterval(300);
-                session.setAttribute("username", acceptedUser);
-                System.out.println(session.getId());
+                session.setAttribute("username", acceptedUser.getUsername());
                 return user;
             }
         }
@@ -92,7 +89,6 @@ public class UserRESTService implements Serializable{
     @Produces(MediaType.TEXT_PLAIN)
     public Response logout(@Context HttpServletRequest request){
         HttpSession session = request.getSession(false);
-        System.out.println(session.getId());
         session.invalidate();
         return Response.ok("success logout").build();
     }

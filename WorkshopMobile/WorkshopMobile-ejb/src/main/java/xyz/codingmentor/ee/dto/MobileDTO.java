@@ -8,7 +8,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import xyz.codingmentor.ee.annotation.Validate;
-import xyz.codingmentor.ee.interceptor.BeanValidation;
 
 @Validate
 public class MobileDTO implements Serializable{
@@ -43,9 +42,7 @@ public class MobileDTO implements Serializable{
         // Default conctruktor for REST API
     }
 
-    public MobileDTO(String iPhone_5SE, String apple, String toString, int i, int i0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
     public void setId(String id) {
         this.id = id;

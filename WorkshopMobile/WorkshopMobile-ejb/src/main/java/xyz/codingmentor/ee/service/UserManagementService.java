@@ -18,7 +18,6 @@ import javax.ejb.LockType;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import xyz.codingmentor.ee.dto.UserDTO;
-import xyz.codingmentor.ee.interceptor.BeanValidation;
 
 @Singleton
 @LocalBean

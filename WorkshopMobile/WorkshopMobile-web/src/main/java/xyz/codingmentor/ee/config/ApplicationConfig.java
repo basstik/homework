@@ -10,7 +10,6 @@ import xyz.codingmentor.ee.config.service.CartRESTService;
 import xyz.codingmentor.ee.config.service.InventoryRESTService;
 import xyz.codingmentor.ee.config.service.UserRESTService;
 import xyz.codingmentor.ee.mappers.GeneralExceptionMapper;
-import xyz.codingmentor.ee.mappers.IdNotMatchExceptionMapper;
 import xyz.codingmentor.ee.mappers.ValidationExceptionMapper;
 
 @ApplicationPath("/mobileworkshop")
@@ -23,8 +22,7 @@ public class ApplicationConfig extends Application {
         c.add(CartRESTService.class);
         c.add(InventoryRESTService.class);
         c.add(UserRESTService.class);
-        
-        c.add(IdNotMatchExceptionMapper.class);    
+          
         c.add(ValidationExceptionMapper.class);
         c.add(GeneralExceptionMapper.class);
         classes = Collections.unmodifiableSet(c);

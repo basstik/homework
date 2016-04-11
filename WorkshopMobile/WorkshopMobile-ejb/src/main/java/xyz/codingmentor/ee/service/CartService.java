@@ -10,7 +10,6 @@ import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
 import xyz.codingmentor.ee.dto.MobileDTO;
-import xyz.codingmentor.ee.interceptor.BeanValidation;
 
 @Stateful
 @StatefulTimeout(value = 20, unit = TimeUnit.SECONDS)

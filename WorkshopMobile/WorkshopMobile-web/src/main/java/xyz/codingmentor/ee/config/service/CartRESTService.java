@@ -2,11 +2,9 @@ package xyz.codingmentor.ee.config.service;
 
 
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -42,13 +40,12 @@ public class CartRESTService implements Serializable{
             
             //Verify, that the mobile is available in inventory
             //The number of available mobile will decrease by buy 
-            inventoryService.mobileIsPurchasable(mobile);
-
-            //add Mobile to cart
-            cartService.addToCart(mobile);
-            return 1;
+            if(inventoryService.mobileIsPurchasable(mobile)){
+                 //add Mobile to cart
+                 cartService.addToCart(mobile);
+                 return 1;
+            }
         }
-
         return -1;
     }
  

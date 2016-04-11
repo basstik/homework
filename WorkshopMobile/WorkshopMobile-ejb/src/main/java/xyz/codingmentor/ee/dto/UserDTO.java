@@ -11,7 +11,7 @@ import xyz.codingmentor.ee.dto.constraints.RegistrationAfterBirthdayConstraint;
 
 @Validate
 @RegistrationAfterBirthdayConstraint
-public class UserDTO{
+public class UserDTO implements Serializable{
 
     //this is the id of User
     @NotNull
