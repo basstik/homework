@@ -1,0 +1,68 @@
+List users
+GET
+http://localhost:8080/WorkshopMobile-web/mobileworkshop/users
+<<<---------------------------------------------------------------->>>
+
+Details of one user
+GET
+http://localhost:8080/WorkshopMobile-web/mobileworkshop/users/admin
+<<<---------------------------------------------------------------->>>
+
+Create one user
+POST
+http://localhost:8080/WorkshopMobile-web/mobileworkshop/users
+{
+"admin": false,
+"dateOfBirth": "1992-01-01T00:00:00+01:00",
+"firstName": "firstName",
+"lastname": "lastName",
+"password": "demoABC123",
+"registrationDate": "2012-12-21T00:00:00+01:00",
+"username": "NewDemo"
+}
+<<<---------------------------------------------------------------->>>
+
+Delete one user
+DELETE
+http://localhost:8080/WorkshopMobile-web/mobileworkshop/users/demo
+<<<---------------------------------------------------------------->>>
+
+Modify one existing user
+PUT
+http://localhost:8080/WorkshopMobile-web/mobileworkshop/users
+{
+"admin": false,
+"dateOfBirth": "1992-01-01T00:00:00+01:00",
+"firstName": "noop",
+"lastname": "noop",
+"password": "newPassword123",
+"registrationDate": "2012-12-21T00:00:00+01:00",
+"username": "demo"
+
+<<<---------------------------------------------------------------->>>
+
+Login with this user
+POST
+http://localhost:8080/WorkshopMobile-web/mobileworkshop/users/login
+{
+"admin": true,
+"dateOfBirth": "1992-01-01T00:00:00+01:00",
+"firstName": "firstName",
+"lastname": "lastName",
+"password": "adminABC123",
+"registrationDate": "2012-12-21T00:00:00+01:00",
+"username": "admin"
+}
+Response:Set-Cookie: JSESSIONID=433023457ddd9ef5e54a57e740d2; Path=/WorkshopMobile-web; HttpOnly
+<<<---------------------------------------------------------------->>>
+
+Logout the session
+POST
+http://localhost:8080/WorkshopMobile-web/mobileworkshop/users/logout
+
+
+Breakpoint hit at line 93 in class xyz.codingmentor.ee.config.service.UserRESTService by thread default task-1.
+Thread default task-1 stopped at UserRESTService.java:93.
+
+Thread default task-7 stopped at xyz.codingmentor.ee.config.service.UserRESTService$Proxy$_$$_WeldClientProxy.logout - compiled without debug info.
+

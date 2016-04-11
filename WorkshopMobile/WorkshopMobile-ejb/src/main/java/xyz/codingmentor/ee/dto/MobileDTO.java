@@ -8,9 +8,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import xyz.codingmentor.ee.annotation.Validate;
+import xyz.codingmentor.ee.interceptor.BeanValidation;
 
 @Validate
-public class MobileDTO{
+@BeanValidation
+public class MobileDTO implements Serializable{
 
     private String id;
 

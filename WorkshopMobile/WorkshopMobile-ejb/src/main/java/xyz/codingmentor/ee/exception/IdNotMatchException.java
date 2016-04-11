@@ -3,7 +3,7 @@ package xyz.codingmentor.ee.exception;
 import javax.ejb.ApplicationException;
 
 
-@ApplicationException(rollback = true)
+@ApplicationException
 public class IdNotMatchException extends RuntimeException {
 
     public IdNotMatchException(String msg) {

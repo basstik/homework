@@ -1,0 +1,12 @@
+POST
+http://localhost:8080/WorkshopMobile-web/mobileworkshop/cart
+Hint: before muss login (see:TestCasesUsers file)
+{
+"manufacturer": "Apple",
+"piece": 5,
+"price": 10000,
+"type": "S5-S5"
+}
+<<<---------------------------------------------------------------->>>
+PUT
+http://localhost:8080/WorkshopMobile-web/mobileworkshop/cart/checkout

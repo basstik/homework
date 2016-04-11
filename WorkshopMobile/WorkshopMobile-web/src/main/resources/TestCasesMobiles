@@ -1,0 +1,11 @@
+GET
+http://localhost:8080/WorkshopMobile-web/mobileworkshop/mobiles
+<<<---------------------------------------------------------------->>>
+POST
+http://localhost:8080/WorkshopMobile-web/mobileworkshop/mobiles
+{
+"manufacturer": "NewNokia",
+"piece": 3,
+"price": 5000,
+"type": "3310"
+}

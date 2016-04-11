@@ -1,5 +1,6 @@
 package xyz.codingmentor.ee.config.service;
 
+import java.io.Serializable;
 import java.util.Collection;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -15,6 +16,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import xyz.codingmentor.ee.dto.UserDTO;
 import xyz.codingmentor.ee.exception.IdNotMatchException;
 import xyz.codingmentor.ee.interceptor.BeanValidation;
@@ -23,13 +25,14 @@ import xyz.codingmentor.ee.service.UserManagementService;
 
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
-//@BeanValidation
 @Consumes(MediaType.APPLICATION_JSON)
-public class UserRESTService {
+@BeanValidation
+public class UserRESTService implements Serializable{
 
     @Inject
     private UserManagementService userMgmtService;
     
+    //http://localhost:8080/WorkshopMobile-web/mobileworkshop/users
     @GET
     @Path("/")
     public Collection<UserDTO> getUsers() {
@@ -65,7 +68,7 @@ public class UserRESTService {
     
     @POST
     @Path("/login")
-    public Integer login(@Context HttpServletRequest request, 
+    public UserDTO login(@Context HttpServletRequest request, 
             UserDTO user){
        
         for (UserDTO acceptedUser : userMgmtService.getUsers()) {
@@ -74,20 +77,22 @@ public class UserRESTService {
                 HttpSession session;
                 session = request.getSession(true);
                 session.setMaxInactiveInterval(300);
-                session.setAttribute("username", acceptedUser.getUsername());
-                return 1;
+                session.setAttribute("username", acceptedUser);
+                System.out.println(session.getId());
+                return user;
             }
         }
-        return -1;
+        throw new IllegalArgumentException("Isn't this username");
     }
     
     @POST
     @Path("/logout")
-    public String logout(@Context HttpServletRequest request){
-        HttpSession session = request.getSession(true);
-        session.invalidate();
-        return "Success invalidate this session";
+    public Response logout(@Context HttpServletRequest request){
+        //HttpSession session = request.getSession(true);
+        //System.out.println(session.getId());
+        //session.invalidate();
+       // return "success logout";
+        return Response.ok("success logout").build();
     }
-
 }
 
