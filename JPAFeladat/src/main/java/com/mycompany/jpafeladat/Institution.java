@@ -10,9 +10,11 @@ package com.mycompany.jpafeladat;
  * @author basstik
  */
 public class Institution {
+
     private String name;
 
     public Institution() {
+        //default constructor
     }
 
     public String getName() {
@@ -22,6 +24,5 @@ public class Institution {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
+
 }

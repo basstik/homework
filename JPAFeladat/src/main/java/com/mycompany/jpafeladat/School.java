@@ -24,6 +24,7 @@ public class School extends Institution implements Serializable {
     private String zipCode;
 
     public School() {
+        //default constructor,because it is entity
     }
 
     public long getId() {

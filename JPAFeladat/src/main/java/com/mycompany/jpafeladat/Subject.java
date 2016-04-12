@@ -1,6 +1,4 @@
-
 package com.mycompany.jpafeladat;
-
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,18 +7,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.*;
 
-
 @Entity
-public class Subject implements Serializable{
+public class Subject implements Serializable {
+
     @Id
     @GeneratedValue
-    @Column(name="ID")
+    @Column(name = "ID")
     private long id;
-    
-    @ManyToMany(mappedBy="subjects")
+
+    @ManyToMany(mappedBy = "subjects")
     private List<Student> students;
 
     public Subject() {
+        //default constructor,because it is entity
     }
 
     public long getId() {
@@ -39,8 +38,4 @@ public class Subject implements Serializable{
         this.students = students;
     }
 
-
-    
-    
-    
 }

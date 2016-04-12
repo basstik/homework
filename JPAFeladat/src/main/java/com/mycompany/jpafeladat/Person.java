@@ -8,22 +8,23 @@ package com.mycompany.jpafeladat;
 import com.mycompany.main.BankCardType;
 import javax.persistence.*;
 
-
 @MappedSuperclass
 @AttributeOverrides({
-    @AttributeOverride(name="name", column=@Column(name="name_of_person"))
-})   
+    @AttributeOverride(name = "name", column = @Column(name = "name_of_person"))
+})
 public class Person {
+
     @Id
     @GeneratedValue
-    private long id;
-   
-    private String name;
-    
+    protected long id;
+
+    protected String name;
+
     @Enumerated(EnumType.STRING)
-    private BankCardType bankCardType;
-    
+    protected BankCardType bankCardType;
+
     public Person() {
+        //default constructor,because it is entity
     }
 
     public long getId() {
@@ -49,8 +50,5 @@ public class Person {
     public void setBankCardType(BankCardType bankCardType) {
         this.bankCardType = bankCardType;
     }
-    
-    
-    
-    
+
 }

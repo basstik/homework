@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,14 +26,18 @@ public class Main {
 
     private static final Logger LOG = Logger.getLogger(Main.class.getName());
 
+    private Main() {
+    }
+
+    
     public static void main(String[] args) throws ParseException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("EntMgr_name_practice");
         EntityManager em = emf.createEntityManager();
 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        
-        //SCHOOL
+
+        //School
         School school = new School();
         school.setCountry("Budapset");
         school.setZipCode("1202");
@@ -43,11 +46,12 @@ public class Main {
         school2.setCountry("Szeged");
         school2.setZipCode("8787");
         em.persist(school2);
-        
+
         tx.commit();
         tx.begin();
         //<<<------------------------------------------------------->>
-        
+        //Add Student and Subject entity to database
+
         //Student
         Student student = new Student();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -58,7 +62,7 @@ public class Main {
         student2.setName("Demo");
         em.persist(student);
         em.persist(student2);
-        
+
         //Subject
         Subject subject = new Subject();
         Subject subject2 = new Subject();
@@ -67,19 +71,20 @@ public class Main {
         tx.commit();
         tx.begin();
         //<<<-------------------------------------------------------->>
-        
+        //Create relation between Student and Subject
+
         List<Student> students = new ArrayList<>();
         students.add(student);
         students.add(student2);
-        
+
         subject.setStudents(students);
-        
+
         List<Subject> subjects = new ArrayList<>();
         subjects.add(subject);
         subjects.add(subject2);
-        
+
         student.setSubjects(subjects);
-        
+
         em.persist(student);
         em.persist(subject);
         tx.commit();
@@ -87,31 +92,44 @@ public class Main {
 
         //<<<-------------------------------------------------------->>
         //Add friends to student
-        
-        ArrayList<String> friends = new ArrayList<String>(
-             Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
+        ArrayList<String> friends = new ArrayList<>(
+                Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
         student.setFriends(friends);
         tx.commit();
         tx.begin();
         //<<<-------------------------------------------------------->>
-        //Try the School.findById
-        
+        //Query the School.findById
+
         TypedQuery<School> findById = em.createNamedQuery("School.findById", School.class);
         findById.setParameter("my_id", 1);
-        System.out.println(findById.getResultList());
         LOG.info(findById.getResultList().toString());
         tx.commit();
         tx.begin();
-        
+
         //<<<-------------------------------------------------------->>
-        //Try the School.findById
-        
-        TypedQuery<School> countOfFriends = em.createNamedQuery(
-                "Student.countOfFriends", School.class);
-        System.out.println(countOfFriends.getResultList());
+        //Query the Student.countOfFriends
+        TypedQuery<Student> countOfFriends = em.createNamedQuery(
+                "Student.countOfFriends", Student.class);
+        LOG.info(countOfFriends.getResultList().toString());
         tx.commit();
-        
-        
+        tx.begin();
+
+        //<<<-------------------------------------------------------->>
+        //Query the Student.findByBankCardType
+        TypedQuery<Student> bankcardOfStudent = em.createNamedQuery(
+                "Student.findByBankCardType", Student.class);
+        bankcardOfStudent.setParameter("type", BankCardType.MASTER_CARD);
+        LOG.info(bankcardOfStudent.getResultList().toString());
+        tx.commit();
+        tx.begin();
+
+        //<<<-------------------------------------------------------->>
+        //Query the School.findByHUNCountry
+        TypedQuery<School> findByHUNCountry = em.createNamedQuery(
+                "School.findByHUNCountry", School.class);
+        LOG.info(findByHUNCountry.getResultList().toString());
+        tx.commit();
+
         em.close();
         emf.close();
 

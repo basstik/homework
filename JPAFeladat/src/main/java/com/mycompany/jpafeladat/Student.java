@@ -5,13 +5,10 @@
  */
 package com.mycompany.jpafeladat;
 
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.*;
 
 /**
@@ -21,17 +18,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "student_table")
 @NamedQueries({
-    @NamedQuery(name="Student.countOfFriends",
-                query="SELECT COUNT(s.friends) FROM Student s"),
-    @NamedQuery(name="Person.findByBankCardType",
-                query="SELECT s FROM Student s WHERE s.bankCardType = :type")
-}) 
+    @NamedQuery(name = "Student.countOfFriends",
+            query = "SELECT COUNT(s.friends) FROM Student s"),
+    @NamedQuery(name = "Student.findByBankCardType",
+            query = "SELECT s FROM Student s WHERE s.bankCardType = :type")
+})
 public class Student extends Person implements Serializable {
 
-    @Id
-    @GeneratedValue
-    @Column(name="ID")
-    private long id;
 
     @ManyToMany
     @JoinTable(
@@ -40,15 +33,15 @@ public class Student extends Person implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "SUBJECT_ID", referencedColumnName = "ID"))
     private List<Subject> subjects;
 
-    
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
-    
-  @ElementCollection
-  @CollectionTable(name ="friends_tags")
-  private List<String> friends;
-    
+
+    @ElementCollection
+    @CollectionTable(name = "friends_tags")
+    private List<String> friends;
+
     public Student() {
+        //default constructor,because it is entity
     }
 
     public List<Subject> getSubjects() {
@@ -67,15 +60,6 @@ public class Student extends Person implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public List<String> getFriends() {
         return friends;
     }
@@ -83,12 +67,11 @@ public class Student extends Person implements Serializable {
     public void setFriends(List<String> friends) {
         this.friends = friends;
     }
+  
 
     @Override
     public String toString() {
         return "Student{" + "id=" + id + ", subjects=" + subjects + ", dateOfBirth=" + dateOfBirth + ", friends=" + friends + '}';
     }
-
-    
 
 }
