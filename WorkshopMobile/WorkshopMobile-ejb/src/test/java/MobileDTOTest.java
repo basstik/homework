@@ -1,5 +1,4 @@
 
-import java.text.ParseException;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -10,7 +9,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import xyz.codingmentor.ee.dto.MobileDTO;
-import xyz.codingmentor.ee.dto.UserDTO;
 
 /**
  *
@@ -40,11 +38,13 @@ public class MobileDTOTest {
         Assert.assertEquals(0, violations.size());
     }
     
-        @Test
+    @Test
     public void wrongTypeOfMobileDTO(){
         MobileDTO mobile = new MobileDTO("ab", "Samsun", 40000, 10);
         Set<ConstraintViolation<MobileDTO>> violations = validator.validate(mobile);
         Assert.assertEquals(1, violations.size());
+        Assert.assertEquals("The type of mobile require min 3 character",
+                violations.iterator().next().getMessage());
     }
 
 

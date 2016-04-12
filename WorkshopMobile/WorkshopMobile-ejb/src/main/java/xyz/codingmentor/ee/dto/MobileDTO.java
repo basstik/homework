@@ -15,11 +15,11 @@ public class MobileDTO implements Serializable{
     private String id;
 
     @NotNull
-    @Pattern(regexp = "....*")
+    @Pattern(regexp = "....*", message = "The type of mobile require min 3 character")
     private String type;
 
     @NotNull
-    @Pattern(regexp = "....*")
+    @Pattern(regexp = "....*", message = "The manufacture of mobile require min 3 character")
     private String manufacturer;
 
     @NotNull

@@ -15,7 +15,7 @@ public class UserDTO implements Serializable{
 
     //this is the id of User
     @NotNull
-    @Pattern(regexp = "....*")
+    @Pattern(regexp = "....*", message = "The username is too short. (min 3 character)")
     private String username;
     
     @NotNull

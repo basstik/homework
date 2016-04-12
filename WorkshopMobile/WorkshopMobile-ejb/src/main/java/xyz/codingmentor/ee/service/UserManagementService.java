@@ -10,22 +10,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.ejb.ConcurrencyManagement;
-import javax.ejb.ConcurrencyManagementType;
-import javax.ejb.LocalBean;
 import javax.ejb.Lock;
 import javax.ejb.LockType;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.inject.Inject;
 import xyz.codingmentor.ee.dto.UserDTO;
 
 @Singleton
-@LocalBean
 @Startup
-@ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class UserManagementService implements Serializable{
 
-    private List<UserDTO> userList = new ArrayList<>();
+    private final List<UserDTO> userList = new ArrayList<>();
+    
+    @Inject
+    private Logger logger;
 
     public UserManagementService() {
         //default constuctor, because it is Bean class
@@ -47,7 +46,7 @@ public class UserManagementService implements Serializable{
             userList.add(new UserDTO("demo", "demoABC123", "firstName",
                     "lastName", birthDay, regDate, false));
         } catch (ParseException ex) {
-            Logger.getLogger(UserManagementService.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         }
     }
 

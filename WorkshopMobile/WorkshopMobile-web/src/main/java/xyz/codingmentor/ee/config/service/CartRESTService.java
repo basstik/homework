@@ -37,11 +37,7 @@ public class CartRESTService implements Serializable{
         Object username = session.getAttribute("username");
 
         if (username != null && username instanceof String) {
-            
-            //Verify, that the mobile is available in inventory
-            //The number of available mobile will decrease by buy 
             if(inventoryService.mobileIsPurchasable(mobile)){
-                 //add Mobile to cart
                  cartService.addToCart(mobile);
                  return 1;
             }

@@ -6,19 +6,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.ejb.LocalBean;
 import javax.ejb.Lock;
 import javax.ejb.LockType;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import xyz.codingmentor.ee.dto.MobileDTO;
 
-@Singleton
-@LocalBean      
+@Singleton   
 @Startup
 public class InventoryService implements Serializable{
 
-    private List<MobileDTO> mobilList = new ArrayList<>();
+    private final List<MobileDTO> mobilList = new ArrayList<>();
 
     public InventoryService() {
         //default constuctor, because it is Bean class

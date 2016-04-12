@@ -12,13 +12,10 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import xyz.codingmentor.ee.dto.UserDTO;
 
 
@@ -62,6 +59,8 @@ public class UserDTOTest {
              
         Set<ConstraintViolation<UserDTO>> violations = validator.validate(user);
         Assert.assertEquals(1, violations.size());
+        Assert.assertEquals("The username is too short. (min 3 character)",
+                violations.iterator().next().getMessage());
     }
     
     
