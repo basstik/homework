@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mycompany.main;
 
 import com.mycompany.jpafeladat.*;
@@ -95,6 +91,15 @@ public class Main {
         ArrayList<String> friends = new ArrayList<>(
                 Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
         student.setFriends(friends);
+        tx.commit();
+        tx.begin();
+        
+        //<<<-------------------------------------------------------->>
+        //Add teacher
+        Teacher teacher1 = new Teacher();
+        teacher1.setBankCardType(BankCardType.MASTER_CARD);
+        teacher1.setStartOfJob(sdf.parse("8/1/2010"));
+        
         tx.commit();
         tx.begin();
         //<<<-------------------------------------------------------->>

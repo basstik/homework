@@ -25,6 +25,7 @@ public class Teacher extends Person implements Serializable {
     private List<Subject> subjects;
 
     public Teacher() {
+         //default constructor,because it is entity
     }
 
     public Date getStartOfJob() {
