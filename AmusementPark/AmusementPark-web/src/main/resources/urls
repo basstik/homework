@@ -1,0 +1,89 @@
+JNDI Name: jdbc/Park
+Persistence unit name: JpaPUPark
+Table generate strategi: Drop and Table
+pool name: derby-park
+
+Persistence Provider: EclipseLink ( JPA2.1 )
+
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+List the parks
+GET
+http://localhost:8080/AmusementPark-web/park
+
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Add new park
+POST
+http://localhost:8080/AmusementPark-web/park/addpark
+{   
+	"name":"FantasticPark",
+        "postCode":"1098",
+        "country":"HUN",
+        "city":"Budapest",
+        "street":"Fo utca",
+        "streetNumber":"34",
+        "money":123456,
+        "area":1000
+}
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Add new machine
+POST
+http://localhost:8080/AmusementPark-web/machine/addmachine
+{
+	"fantasiaName":"SuperGokart",
+	"sizeOfMachine":"400",
+	"priceOfTicket":"500",
+	"capacity":"30",
+	"type":"GOKART",
+	"minimumAge":"14"
+}
+
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Add machine to park
+Verify that the id of park and machine is valid
+POST
+http://localhost:8080/AmusementPark-web/park/2/addmachine/1
+The first the park id and the second is the machine id
+
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Remove machine	//teszt
+POST
+http://localhost:8080/AmusementPark-web/park/2/removemachine/1
+The first the park id and the second is the machine id
+
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Add visitor
+POST
+http://localhost:8080/AmusementPark-web/visitor/addvisitor
+{
+	"name":"TestVisitor",
+	"state":"REST",
+	"entryDate":12000,
+	"age":18,
+	"isActive":"false"
+}
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Get visitors
+GET
+http://localhost:8080/AmusementPark-web/visitor
+
+
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Login visitor to park
+POST
+http://localhost:8080/AmusementPark-web/visitor/logintopark/1
+Verify that the id of visitor is valid
+
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Exit visitor from park
+POST
+http://localhost:8080/AmusementPark-web/visitor/exitfrompark/1
+Verify that the id of visitor is valid
+
+
+
+
+
+
+
+
+
