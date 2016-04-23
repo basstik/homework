@@ -57,6 +57,7 @@ public class Visitor implements Serializable {
     private Park park;
 
     public Visitor() {
+        //it is entity
     }
 
     public Park getPark() {
@@ -122,10 +123,6 @@ public class Visitor implements Serializable {
         return calculateAge;
     }
 
-//    public void setAge(Integer age) {
-//        this.age = age;
-//    }
-
     public boolean isIsActive() {
         return isActive;
     }
@@ -150,14 +147,7 @@ public class Visitor implements Serializable {
         return dateOfBirth;
     }
 
-//    public void setDateOfBirth(String date) throws ParseException {
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//        this.dateOfBirth.setTime(format.parse(date));
-//    }
-
     public void setDateOfBirth(Calendar dateOfBirth) {
-//        this.dateOfBirth = dateOfBirth;
-    
         this.dateOfBirth = dateOfBirth;
     }
     

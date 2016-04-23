@@ -2,6 +2,7 @@ package xyz.codingmentor.facades;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolation;
@@ -10,6 +11,8 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 public abstract class EntityFacade {
+
+    private static final Logger LOG = Logger.getLogger(EntityFacade.class.getName());
 
     @PersistenceContext(unitName = "JpaPUPark")
     protected EntityManager entityManager;
@@ -23,11 +26,11 @@ public abstract class EntityFacade {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(entity);
-        if (constraintViolations.size() > 0) {
+        if (!constraintViolations.isEmpty()) {
             Iterator<ConstraintViolation<T>> iterator = constraintViolations.iterator();
             while (iterator.hasNext()) {
                 ConstraintViolation<T> cv = iterator.next();
-                System.err.println(cv.getRootBeanClass().getName() + "." + cv.getPropertyPath() + " " + cv.getMessage());
+                LOG.info(cv.getRootBeanClass().getName() + "." + cv.getPropertyPath() + " " + cv.getMessage());
             }
         } else {
             entityManager.persist(entity);

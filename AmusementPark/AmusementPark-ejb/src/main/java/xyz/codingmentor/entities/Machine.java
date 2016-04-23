@@ -44,7 +44,7 @@ public class Machine implements Serializable {
     private Integer minimumAge;
 
     public Machine() {
-        
+        //it is entity
     }
 
     public Integer getSellingPrice() {

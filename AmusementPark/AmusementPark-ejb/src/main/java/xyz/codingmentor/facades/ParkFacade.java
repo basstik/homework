@@ -1,7 +1,6 @@
 package xyz.codingmentor.facades;
 
 import java.util.List;
-import java.util.logging.Logger;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.persistence.Query;
@@ -10,8 +9,6 @@ import xyz.codingmentor.entities.Park;
 
 @Singleton
 public class ParkFacade extends EntityFacade {
-
-    private static final Logger LOG = Logger.getLogger(ParkFacade.class.getName());
 
     @Inject
     MachineFacade machineFacade;
@@ -29,7 +26,7 @@ public class ParkFacade extends EntityFacade {
         create(park);
     }
 
-    public Park getPark(Long idOfPark) throws NotFoundException {
+    public Park getPark(Long idOfPark) {
         Park park = entityManager.find(Park.class, idOfPark);
         if (null == park) {
             throw new NotFoundException("Park doesn't exit in DB.");

@@ -2,16 +2,13 @@
 package xyz.codingmentor.rest;
 
 import java.util.List;
-import static java.util.concurrent.locks.LockSupport.park;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import xyz.codingmentor.entities.Machine;
-import xyz.codingmentor.entities.Park;
 import xyz.codingmentor.service.MachineService;
-import xyz.codingmentor.service.ParkService;
 
 
 @Path("/machine")

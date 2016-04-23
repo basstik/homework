@@ -1,5 +1,5 @@
 
-package xyz.codingmentor.Exceptions;
+package xyz.codingmentor.exceptions;
 
 
 public class NotEnoughMoneyException extends RuntimeException {

@@ -4,9 +4,8 @@ import xyz.codingmentor.entities.Park;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.NotFoundException;
-import xyz.codingmentor.Exceptions.NotEnoughAreaException;
-import xyz.codingmentor.Exceptions.NotEnoughMoneyException;
+import xyz.codingmentor.exceptions.NotEnoughAreaException;
+import xyz.codingmentor.exceptions.NotEnoughMoneyException;
 import xyz.codingmentor.entities.Machine;
 import xyz.codingmentor.facades.MachineFacade;
 import xyz.codingmentor.facades.ParkFacade;
@@ -33,7 +32,7 @@ public class ParkService {
         return parkFacade.create(park);
     }
 
-    public Integer addMachineToPark(Long idOfPark, Long idOfMachine) throws NotEnoughMoneyException, NotEnoughAreaException, NotFoundException {
+    public Integer addMachineToPark(Long idOfPark, Long idOfMachine){
         Park park = parkFacade.getPark(idOfPark);
         Machine machine = machineFacade.getMachine(idOfMachine);
 
@@ -60,7 +59,7 @@ public class ParkService {
 
     }
 
-    public Integer deleteMachineFromPark(Long idOfPark, Long idOfMachine) throws NotFoundException {
+    public Integer deleteMachineFromPark(Long idOfPark, Long idOfMachine){
         Park park = parkFacade.getPark(idOfPark);
         Machine machine = machineFacade.getMachine(idOfMachine);
 
@@ -78,14 +77,14 @@ public class ParkService {
 
     }
 
-    public Integer deletePark(Long idOfPark) throws NotFoundException {
+    public Integer deletePark(Long idOfPark){
         Park park = parkFacade.getPark(idOfPark);
         parkFacade.remove(park);
         return 1;
     }
 
-    public Integer updatePark(Long idOfPark, Park park) throws NotFoundException {
-        Park parkInDB = parkFacade.getPark(idOfPark);
+    public Integer updatePark(Long idOfPark, Park park){
+        parkFacade.getPark(idOfPark);
         park.setId(idOfPark);
         parkFacade.merge(park);
         return 1;

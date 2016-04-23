@@ -1,3 +1,5 @@
+
+
 JNDI Name: jdbc/Park
 Persistence unit name: JpaPUPark
 Table generate strategi: Drop and Table
@@ -12,7 +14,7 @@ http://localhost:8080/AmusementPark-web/park
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Add new park
-POST
+PUT
 http://localhost:8080/AmusementPark-web/park/addpark
 {   
 	"name":"FantasticPark",
@@ -22,43 +24,44 @@ http://localhost:8080/AmusementPark-web/park/addpark
         "street":"Fo utca",
         "streetNumber":"34",
         "money":123456,
-        "area":1000
+        "area":1000,
+        "priceOfTicket":2000
 }
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Add new machine
-POST
+PUT
 http://localhost:8080/AmusementPark-web/machine/addmachine
 {
 	"fantasiaName":"SuperGokart",
-	"sizeOfMachine":"400",
-	"priceOfTicket":"500",
-	"capacity":"30",
+	"sizeOfMachine":400,
+	"priceOfTicket":500,
+	"maxCapacity":30,
+	"sellingPrice":20000;
 	"type":"GOKART",
 	"minimumAge":"14"
 }
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Add machine to park
-Verify that the id of park and machine is valid
 POST
 http://localhost:8080/AmusementPark-web/park/2/addmachine/1
 The first the park id and the second is the machine id
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
-Remove machine	//teszt
+Remove machine from park
 POST
 http://localhost:8080/AmusementPark-web/park/2/removemachine/1
 The first the park id and the second is the machine id
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Add visitor
-POST
+PUT
 http://localhost:8080/AmusementPark-web/visitor/addvisitor
 {
 	"name":"TestVisitor",
 	"state":"REST",
-	"entryDate":12000,
-	"age":18,
+	"money":50000,
+	"dateOfBirth":"1992-04-23T22:22:22.75+02:00",
 	"isActive":"false"
 }
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
@@ -70,19 +73,90 @@ http://localhost:8080/AmusementPark-web/visitor
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Login visitor to park
 POST
-http://localhost:8080/AmusementPark-web/visitor/logintopark/1
-Verify that the id of visitor is valid
+http://localhost:8080/AmusementPark-web/visitor/logintopark/1/park/1
+The first is the visitor id and the second is the park id
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Exit visitor from park
 POST
-http://localhost:8080/AmusementPark-web/visitor/exitfrompark/1
-Verify that the id of visitor is valid
+http://localhost:8080/AmusementPark-web/visitor/exitfrompark/1/park/1
+The first si the visitor id and the second is the park id
 
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Visitor board the machine
+POST
+http://localhost:8080/AmusementPark-web/visitor/boardtomachine/1/machine/1
+The first is the visitor id and the second is the park id
 
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Visitor unboard the machine
+POST
+http://localhost:8080/AmusementPark-web/visitor/unboardtomachine/1/machine/1
+The first is the visitor id and the second is the park id
 
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Visitor read to guestBook
+POST
+http://localhost:8080/AmusementPark-web/visitor/writetobook/3/park/2
+The first is the visitor id and the second is the park id
+Content-Type: text/plain
+Content: This was a fantastic expreience!
 
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Remove park
+DELETE
+http://localhost:8080/AmusementPark-web/park/deletepark/1
 
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Update park
+POST
+http://localhost:8080/AmusementPark-web/park/updatepark/1
+{   
+	"name":"BudapestiVidampark",
+        "postCode":"1111",
+        "country":"HUN",
+        "city":"Budapest",
+        "street":"Varosliget utca",
+        "streetNumber":"22",
+        "money":0,
+        "area":10000,
+        "priceOfTicket":3000
+}
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Remove visitor
+DELETE
+http://localhost:8080/AmusementPark-web/visitor/deletevisitor/1
+{
+	"name":"Aladar",
+	"state":"REST",
+	"money":2000,
+	"dateOfBirth":"1998-01-23T22:22:22.75+02:00",
+	"isActive":"false"
+}
+
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Update visitor
+POST
+http://localhost:8080/AmusementPark-web/visitor/updatevisitor/1
+
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Remove machine
+DELETE
+http://localhost:8080/AmusementPark-web/machine/deletemachine/1
+
+<<<<<<<<------------------------------------------------->>>>>>>>>>>>
+Update machine
+POST
+http://localhost:8080/AmusementPark-web/machine/updatemachine/1
+{
+	"fantasiaName":"Swing",
+	"sizeOfMachine":30,
+	"priceOfTicket":400,
+	"maxCapacity":100,
+	"sellingPrice"12000;
+	"type":"SWING",
+	"minimumAge":"6"
+}
 
 
 

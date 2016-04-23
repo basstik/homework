@@ -1,6 +1,7 @@
 
 package xyz.codingmentor.entities;
 
+import java.io.Serializable;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Embeddable
 @Access(AccessType.PROPERTY)
-public class Address {
+public class Address implements Serializable{
 
     @NotNull private String postCode;
     @NotNull private String country;
@@ -17,6 +18,7 @@ public class Address {
     @NotNull private String streetNumber;
 
     public Address() {
+        //it is entity
     }
 
     public String getPostCode() {

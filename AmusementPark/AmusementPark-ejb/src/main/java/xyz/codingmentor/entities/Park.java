@@ -47,6 +47,7 @@ public class Park implements Serializable {
     private List<Machine> machines;
 
     public Park() {
+        //it is entity
     }
 
     public Integer getPriceOfTicket() {

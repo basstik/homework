@@ -3,11 +3,10 @@ package xyz.codingmentor.service;
 import java.util.Date;
 import xyz.codingmentor.entities.Visitor;
 import java.util.List;
-import javax.ws.rs.NotFoundException;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import xyz.codingmentor.Exceptions.NotEnoughAreaException;
-import xyz.codingmentor.Exceptions.NotEnoughMoneyException;
+import xyz.codingmentor.exceptions.NotEnoughAreaException;
+import xyz.codingmentor.exceptions.NotEnoughMoneyException;
 import xyz.codingmentor.entities.GuestBook;
 import xyz.codingmentor.entities.Machine;
 import xyz.codingmentor.entities.Park;
@@ -41,7 +40,7 @@ public class VisitorService {
         return visitorFacade.addVisitor(visitor);
     }
 
-    public void loginToPark(Long ifOfVisitor, Long idOfPark) throws NotFoundException {
+    public void loginToPark(Long ifOfVisitor, Long idOfPark){
         Visitor visitor = visitorFacade.getVisitor(ifOfVisitor);
         Park park = parkFacade.getPark(idOfPark);
         if (visitor.isIsActive()) {
@@ -62,9 +61,9 @@ public class VisitorService {
         visitor.setPark(park);
     }
 
-    public void exitFromPark(Long ifOfVisitor, Long idOfPark) throws NotFoundException {
+    public void exitFromPark(Long ifOfVisitor, Long idOfPark){
         Visitor visitor = visitorFacade.getVisitor(ifOfVisitor);
-        Park park = parkFacade.getPark(idOfPark);
+        parkFacade.getPark(idOfPark);
         if (!visitor.isIsActive()) {
             throw new IllegalArgumentException("The visitor is already in park.");
         }
@@ -79,7 +78,7 @@ public class VisitorService {
 
     }
 
-    public void boardToMachine(Long idOfVisitor, Long idOfMachine) throws NotFoundException {
+    public void boardToMachine(Long idOfVisitor, Long idOfMachine){
         Visitor visitor = visitorFacade.getVisitor(idOfVisitor);
         Machine machine = machineFacade.getMachine(idOfMachine);
         if (!visitor.isIsActive()) {
@@ -109,7 +108,7 @@ public class VisitorService {
         visitor.setMachine(machine);
     }
 
-    public void unBoardFromMachine(Long idOfVisitor, Long idOfMachine) throws NotFoundException {
+    public void unBoardFromMachine(Long idOfVisitor, Long idOfMachine) {
         Visitor visitor = visitorFacade.getVisitor(idOfVisitor);
         Machine machine = machineFacade.getMachine(idOfMachine);
         if (!visitor.isIsActive()) {
@@ -121,7 +120,7 @@ public class VisitorService {
         visitor.setMachine(null);
     }
 
-    public String writeToGuestBook(Long idOfVisitor, Long idOfPark, String message) throws NotFoundException {
+    public String writeToGuestBook(Long idOfVisitor, Long idOfPark, String message) {
         Visitor visitor = visitorFacade.getVisitor(idOfVisitor);
         Park park = parkFacade.getPark(idOfPark);
 
@@ -134,14 +133,14 @@ public class VisitorService {
         return "Thank the feedback";
     }
 
-    public Integer deleteVisitor(Long idOfVisitor) throws NotFoundException {
+    public Integer deleteVisitor(Long idOfVisitor) {
         Visitor visitor = visitorFacade.getVisitor(idOfVisitor);
         visitorFacade.remove(visitor);
         return 1;
     }
 
-    public Integer updateVisitor(Long idOfVisitor, Visitor visitor) throws NotFoundException {
-        Visitor visitorInDB = visitorFacade.getVisitor(idOfVisitor);
+    public Integer updateVisitor(Long idOfVisitor, Visitor visitor) {
+        visitorFacade.getVisitor(idOfVisitor);
         visitor.setId(idOfVisitor);
         visitorFacade.merge(visitor);
         return 1;

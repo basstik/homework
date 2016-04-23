@@ -6,7 +6,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import xyz.codingmentor.entities.Park;
 import xyz.codingmentor.entities.Visitor;
 import xyz.codingmentor.service.VisitorService;
 
