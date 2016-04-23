@@ -1,0 +1,5 @@
+build/
+target/
+.*.jar
+nb-configuration.xml
+
