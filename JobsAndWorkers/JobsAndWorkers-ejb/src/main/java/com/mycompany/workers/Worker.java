@@ -2,8 +2,8 @@ package com.mycompany.workers;
 
 import com.mycompany.dto.Job;
 import com.mycompany.dto.StatisticsInfo;
-import com.mycompany.scheduler.QueueService;
-import com.mycompany.scheduler.TopicService;
+import com.mycompany.JMSservice.QueueService;
+import com.mycompany.JMSservice.TopicService;
 import java.util.Date;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;

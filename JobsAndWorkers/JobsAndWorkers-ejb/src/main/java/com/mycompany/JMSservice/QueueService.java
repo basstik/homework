@@ -1,4 +1,4 @@
-package com.mycompany.scheduler;
+package com.mycompany.JMSservice;
 
 import com.mycompany.dto.Job;
 import java.util.logging.Logger;

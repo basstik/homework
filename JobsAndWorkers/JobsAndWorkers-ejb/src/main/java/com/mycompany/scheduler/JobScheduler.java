@@ -1,5 +1,7 @@
 package com.mycompany.scheduler;
 
+import com.mycompany.JMSservice.QueueService;
+import com.mycompany.JMSservice.TopicService;
 import com.mycompany.dto.Job;
 import com.mycompany.dto.StatisticsInfo;
 import com.mycompany.workers.MediumWorker;
@@ -60,7 +62,7 @@ public class JobScheduler {
 
     @Timeout
     public synchronized void createTenJobsPerMinutes() throws InterruptedException {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 10; i++) {
             Job job = new Job();
             Long jobId = idCounter++;
             int timeOfJob = 1+(int) (Math.random() * 5);
