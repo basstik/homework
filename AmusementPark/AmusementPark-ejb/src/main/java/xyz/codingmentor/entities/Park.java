@@ -2,6 +2,8 @@ package xyz.codingmentor.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,6 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
 @XmlRootElement
 @Entity
+@Access(AccessType.FIELD)
 public class Park implements Serializable {
 
     @Id

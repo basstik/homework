@@ -18,7 +18,6 @@ public class MachineREST {
     @Inject
     MachineService machineService;
 
-    //http://localhost:8080/AmusementPark-web/park
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)

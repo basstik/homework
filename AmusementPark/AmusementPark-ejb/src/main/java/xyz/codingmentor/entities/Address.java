@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 
 @Embeddable
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 public class Address implements Serializable{
 
     @NotNull private String postCode;

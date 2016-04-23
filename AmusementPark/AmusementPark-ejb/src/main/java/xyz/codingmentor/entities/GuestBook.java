@@ -2,7 +2,7 @@
 package xyz.codingmentor.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -32,7 +32,7 @@ public class GuestBook implements Serializable{
     private Visitor visitorId;
     
     @Temporal(TemporalType.DATE)
-    private Date entryDate;
+    private Calendar entryDate;
     
     private String comment;
 
@@ -60,11 +60,11 @@ public class GuestBook implements Serializable{
         this.visitorId = visitorId;
     }
 
-    public Date getEntryDate() {
+    public Calendar getEntryDate() {
         return entryDate;
     }
 
-    public void setEntryDate(Date entryDate) {
+    public void setEntryDate(Calendar entryDate) {
         this.entryDate = entryDate;
     }
 

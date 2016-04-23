@@ -1,6 +1,6 @@
 package xyz.codingmentor.service;
 
-import java.util.Date;
+import java.util.Calendar;
 import xyz.codingmentor.entities.Visitor;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -126,9 +126,10 @@ public class VisitorService {
 
         GuestBook guestBook = new GuestBook();
         guestBook.setComment(message);
-        guestBook.setEntryDate(new Date());
+        guestBook.setEntryDate(Calendar.getInstance());
         guestBook.setParkId(park);
         guestBook.setVisitorId(visitor);
+        guestBookFacade.addGuestBook(guestBook);
 
         return "Thank the feedback";
     }
