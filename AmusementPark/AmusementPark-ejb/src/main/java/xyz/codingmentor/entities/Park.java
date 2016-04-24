@@ -51,6 +51,7 @@ public class Park implements Serializable {
 
     public Park() {
         //it is entity
+        address = new Address();
     }
 
     public Integer getPriceOfTicket() {
@@ -117,5 +118,47 @@ public class Park implements Serializable {
     public void removeMachine(Machine machine) {
         this.machines.remove(machine);
     }
+
+    public String getPostCode() {
+        return address.getPostCode();
+    }
+
+    public void setPostCode(String postCode) {
+        address.setPostCode(postCode);
+    }
+
+    public String getCountry() {
+        return address.getCountry();
+    }
+
+    public void setCountry(String country) {
+        address.setCountry(country);
+    }
+
+    public String getCity() {
+        return address.getCity();
+    }
+
+    public void setCity(String city) {
+        address.setCity(city);
+    }
+
+    public String getStreet() {
+        return address.getStreet();
+    }
+
+    public void setStreet(String street) {
+        address.setStreet(street);
+    }
+
+    public String getStreetNumber() {
+        return address.getStreetNumber();
+    }
+
+    public void setStreetNumber(String streetNumber) {
+        address.setStreetNumber(streetNumber);
+    }
+    
+    
 
 }
