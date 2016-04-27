@@ -14,7 +14,7 @@ public class StatisticsBean implements MessageListener {
     private static final Logger LOGGER = Logger.getLogger(StatisticsBean.class.getName());
 
     @Inject
-    StatisticsSingleton statSingleton;
+    private StatisticsSingleton statSingleton;
 
     public StatisticsBean() {
         //it is bean

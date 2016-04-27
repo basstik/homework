@@ -26,22 +26,22 @@ public class JobScheduler {
     private static Long idCounter = 0L;
 
     @Inject
-    QueueService queueService;
+    private QueueService queueService;
 
     @Inject
-    TopicService topicService;
+    private TopicService topicService;
 
     @Resource
-    TimerService timerService;
+    private TimerService timerService;
 
     @Inject
-    SlowWorker slowWorker;
+    private SlowWorker slowWorker;
 
     @Inject
-    SpeedWorker speedWorker;
+    private SpeedWorker speedWorker;
 
     @Inject
-    MediumWorker mediumWorker;
+    private MediumWorker mediumWorker;
 
     public void runScheduler() {
         LOG.info("In runScheduler method");

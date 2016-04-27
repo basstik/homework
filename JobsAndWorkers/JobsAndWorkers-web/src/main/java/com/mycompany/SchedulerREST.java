@@ -12,13 +12,13 @@ import javax.ws.rs.core.MediaType;
 
 
 @Path("/")
-public class RunSchedulerREST {
+public class SchedulerREST {
     
     @Inject
-    JobScheduler jobScheduler;
+    private JobScheduler jobScheduler;
     
     @Inject
-    StatisticsSingleton statistics;
+    private StatisticsSingleton statistics;
     
     //http://localhost:8080/JobsAndWorkers-web/jms/run
     
