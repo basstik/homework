@@ -7,14 +7,10 @@ import javax.persistence.Query;
 import xyz.codingmentor.entities.Machine;
 
 @Singleton
-public class MachineFacade extends EntityFacade {
+public class MachineFacade extends EntityFacade<Machine> {
 
     public MachineFacade() {
         //it is bean
-    }
-
-    public void addMachine(Machine machine) {
-        create(machine);
     }
 
     public List<Machine> findAllMachine() {
@@ -30,11 +26,4 @@ public class MachineFacade extends EntityFacade {
         return machine;
     }
 
-    public void update(Machine machine) {
-        merge(machine);
-    }
-
-    public void remove(Machine machine) {
-        delete(machine);
-    }
 }

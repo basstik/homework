@@ -14,8 +14,8 @@ http://localhost:8080/AmusementPark-web/park
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Add new park
-PUT
-http://localhost:8080/AmusementPark-web/park/addpark
+POST
+http://localhost:8080/AmusementPark-web/park
 {   
 	"name":"FantasticPark",
         "postCode":"1098",
@@ -29,8 +29,8 @@ http://localhost:8080/AmusementPark-web/park/addpark
 }
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Add new machine
-PUT
-http://localhost:8080/AmusementPark-web/machine/addmachine
+POST
+http://localhost:8080/AmusementPark-web/machine
 {
 	"fantasiaName":"SuperGokart",
 	"sizeOfMachine":400,
@@ -43,20 +43,20 @@ http://localhost:8080/AmusementPark-web/machine/addmachine
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Add machine to park
-POST
+PUT
 http://localhost:8080/AmusementPark-web/park/2/addmachine/1
 The first the park id and the second is the machine id
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Remove machine from park
-POST
+PUT
 http://localhost:8080/AmusementPark-web/park/2/removemachine/1
 The first the park id and the second is the machine id
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Add visitor
-PUT
-http://localhost:8080/AmusementPark-web/visitor/addvisitor
+POST
+http://localhost:8080/AmusementPark-web/visitor
 {
 	"name":"TestVisitor",
 	"state":"REST",
@@ -72,31 +72,31 @@ http://localhost:8080/AmusementPark-web/visitor
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Login visitor to park
-POST
+PUT
 http://localhost:8080/AmusementPark-web/visitor/logintopark/1/park/1
 The first is the visitor id and the second is the park id
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Exit visitor from park
-POST
+PUT
 http://localhost:8080/AmusementPark-web/visitor/exitfrompark/1/park/1
 The first si the visitor id and the second is the park id
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Visitor board the machine
-POST
+PUT
 http://localhost:8080/AmusementPark-web/visitor/boardtomachine/1/machine/1
 The first is the visitor id and the second is the park id
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Visitor unboard the machine
-POST
+PUT
 http://localhost:8080/AmusementPark-web/visitor/unboardtomachine/1/machine/1
 The first is the visitor id and the second is the park id
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Visitor read to guestBook
-POST
+PUT
 http://localhost:8080/AmusementPark-web/visitor/writetobook/3/park/2
 The first is the visitor id and the second is the park id
 Content-Type: text/plain
@@ -109,7 +109,7 @@ http://localhost:8080/AmusementPark-web/park/deletepark/1
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Update park
-POST
+PUT
 http://localhost:8080/AmusementPark-web/park/updatepark/1
 {   
 	"name":"BudapestiVidampark",
@@ -136,7 +136,7 @@ http://localhost:8080/AmusementPark-web/visitor/deletevisitor/1
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Update visitor
-POST
+PUT
 http://localhost:8080/AmusementPark-web/visitor/updatevisitor/1
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
@@ -146,7 +146,7 @@ http://localhost:8080/AmusementPark-web/machine/deletemachine/1
 
 <<<<<<<<------------------------------------------------->>>>>>>>>>>>
 Update machine
-POST
+PUT
 http://localhost:8080/AmusementPark-web/machine/updatemachine/1
 {
 	"fantasiaName":"Swing",

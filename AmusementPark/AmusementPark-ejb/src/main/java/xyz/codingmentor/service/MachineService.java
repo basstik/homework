@@ -21,16 +21,19 @@ public class MachineService {
         return machineFacade.create(machine);
     }
 
-    public Integer deleteMachine(Long idOfMachine) {
+    public void deleteMachine(Long idOfMachine) {
         Machine machine = machineFacade.getMachine(idOfMachine);
         machineFacade.remove(machine);
-        return 1;
     }
 
-    public Integer updateMachine(Long idOfMachine, Machine machine) {
+    public Machine updateMachine(Long idOfMachine, Machine machine) {
         machineFacade.getMachine(idOfMachine);
         machine.setId(idOfMachine);
-        machineFacade.merge(machine);
-        return 1;
+        machineFacade.update(machine);
+        return machine;
+    }
+    
+    public Machine getMachineById(Long idOfMachine) {
+        return machineFacade.getMachine(idOfMachine);
     }
 }

@@ -32,7 +32,7 @@ public class ParkService {
         return parkFacade.create(park);
     }
 
-    public Integer addMachineToPark(Long idOfPark, Long idOfMachine){
+    public void addMachineToPark(Long idOfPark, Long idOfMachine) {
         Park park = parkFacade.getPark(idOfPark);
         Machine machine = machineFacade.getMachine(idOfMachine);
 
@@ -51,15 +51,14 @@ public class ParkService {
                     + " area, but the machine muss have " + sizeOfMachine + " area.");
         }
 
+        machine.setIdOfLenderPark(park.getId());
         park.setArea(sizeOfPark - sizeOfMachine);
         park.setMoney(moneyOfPark - priceOfMachine);
         park.addMachine(machine);
 
-        return 1;
-
     }
 
-    public Integer deleteMachineFromPark(Long idOfPark, Long idOfMachine){
+    public void deleteMachineFromPark(Long idOfPark, Long idOfMachine) {
         Park park = parkFacade.getPark(idOfPark);
         Machine machine = machineFacade.getMachine(idOfMachine);
 
@@ -72,22 +71,26 @@ public class ParkService {
         park.setArea(sizeOfPark + sizeOfMachine);
         park.setMoney(moneyOfPark + priceOfMachine);
         park.removeMachine(machine);
-
-        return 1;
-
     }
 
-    public Integer deletePark(Long idOfPark){
+    public void deletePark(Long idOfPark) {
         Park park = parkFacade.getPark(idOfPark);
         parkFacade.remove(park);
-        return 1;
     }
 
-    public Integer updatePark(Long idOfPark, Park park){
+    public Park updatePark(Long idOfPark, Park park) {
         parkFacade.getPark(idOfPark);
         park.setId(idOfPark);
-        parkFacade.merge(park);
-        return 1;
+        parkFacade.update(park);
+        return park;
+    }
+
+    public Park getParkById(Long idOfPark) {
+        return parkFacade.getPark(idOfPark);
+    }
+
+    public List<Machine> getMachineListInPark(Long idOfPark) {
+        return parkFacade.findAllMachineInPark(idOfPark);
     }
 
 }

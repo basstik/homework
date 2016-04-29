@@ -1,14 +1,17 @@
 package xyz.codingmentor.facades;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.persistence.Query;
 import javax.ws.rs.NotFoundException;
+import xyz.codingmentor.entities.Machine;
 import xyz.codingmentor.entities.Park;
 
 @Singleton
-public class ParkFacade extends EntityFacade {
+public class ParkFacade extends EntityFacade<Park> {
 
     @Inject
     MachineFacade machineFacade;
@@ -22,10 +25,6 @@ public class ParkFacade extends EntityFacade {
         return query.getResultList();
     }
 
-    public void addPark(Park park) {
-        create(park);
-    }
-
     public Park getPark(Long idOfPark) {
         Park park = entityManager.find(Park.class, idOfPark);
         if (null == park) {
@@ -34,11 +33,17 @@ public class ParkFacade extends EntityFacade {
         return park;
     }
     
-    public void update(Park park){
-        merge(park);
+    public List<Machine> findAllMachineInPark(Long idOfPark) {
+        Query query = entityManager.createNativeQuery(
+                "SELECT machine_fk FROM park_machine WHERE park_fk = ?");
+        query.setParameter(1, idOfPark);
+        List machineIds = query.getResultList();
+        List<Machine> result = new ArrayList<>();
+        for (int i = 0; i < machineIds.size(); i++) {
+            result.add(machineFacade.getMachine((Long) machineIds.get(i)));
+            
+        }
+        return result;
     }
-    
-    public void remove(Park park){
-        delete(park);
-    }
+
 }

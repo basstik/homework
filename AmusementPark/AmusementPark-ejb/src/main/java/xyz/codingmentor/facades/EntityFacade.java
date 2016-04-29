@@ -10,7 +10,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-public abstract class EntityFacade {
+public abstract class EntityFacade<T> {
 
     private static final Logger LOG = Logger.getLogger(EntityFacade.class.getName());
 
@@ -21,7 +21,7 @@ public abstract class EntityFacade {
         //it is bean
     }
 
-    public <T> T create(T entity) {
+    public T create(T entity) {
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -39,15 +39,15 @@ public abstract class EntityFacade {
 
     }
 
-    public <T> T merge(T entity) {
+    public T update(T entity) {
         return entityManager.merge(entity);
     }
 
-    public <T> void delete(T entity) {
+    public void remove(T entity) {
         entityManager.remove(entity);
     }
 
-    public <T> T find(Class<T> clazz, Object primaryKey) {
+    public T find(Class<T> clazz, Object primaryKey) {
         return entityManager.find(clazz, primaryKey);
     }
 

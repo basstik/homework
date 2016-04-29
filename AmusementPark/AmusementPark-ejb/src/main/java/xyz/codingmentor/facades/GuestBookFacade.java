@@ -7,7 +7,7 @@ import javax.persistence.Query;
 import xyz.codingmentor.entities.GuestBook;
 
 @Singleton
-public class GuestBookFacade extends EntityFacade {
+public class GuestBookFacade extends EntityFacade<GuestBook> {
 
     public GuestBookFacade() {
         //it is bean
@@ -18,10 +18,6 @@ public class GuestBookFacade extends EntityFacade {
         return query.getResultList();
     }
 
-    public void addGuestBook(GuestBook guestBook) {
-        create(guestBook);
-    }
-
     public GuestBook getGuestBook(Long idOfGuestBook) {
         GuestBook guestBook = entityManager.find(GuestBook.class, idOfGuestBook);
         if (null == guestBook) {
@@ -29,13 +25,4 @@ public class GuestBookFacade extends EntityFacade {
         }
         return guestBook;
     }
-
-    public void update(GuestBook guestBook) {
-        merge(guestBook);
-    }
-
-    public void remove(GuestBook guestBook) {
-        delete(guestBook);
-    }
-
 }

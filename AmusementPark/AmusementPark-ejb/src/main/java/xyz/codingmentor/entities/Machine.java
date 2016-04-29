@@ -36,6 +36,8 @@ public class Machine implements Serializable {
     @NotNull
     private Integer sellingPrice;
     
+    private Long idOfLenderPark;
+    
     @NotNull
     @Enumerated(EnumType.STRING)
     private MachineType type;
@@ -45,6 +47,14 @@ public class Machine implements Serializable {
 
     public Machine() {
         //it is entity
+    }
+
+    public Long getIdOfLenderPark() {
+        return idOfLenderPark;
+    }
+
+    public void setIdOfLenderPark(Long idOfLenderPark) {
+        this.idOfLenderPark = idOfLenderPark;
     }
 
     public Integer getSellingPrice() {

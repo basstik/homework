@@ -21,7 +21,7 @@ public class VisitorService {
 
     @Inject
     VisitorFacade visitorFacade;
-
+ 
     @Inject
     MachineFacade machineFacade;
 
@@ -37,10 +37,10 @@ public class VisitorService {
 
     public Visitor addVisitor(Visitor visitor) {
 
-        return visitorFacade.addVisitor(visitor);
+        return visitorFacade.create(visitor);
     }
 
-    public void loginToPark(Long ifOfVisitor, Long idOfPark){
+    public void loginToPark(Long ifOfVisitor, Long idOfPark) {
         Visitor visitor = visitorFacade.getVisitor(ifOfVisitor);
         Park park = parkFacade.getPark(idOfPark);
         if (visitor.isIsActive()) {
@@ -48,20 +48,20 @@ public class VisitorService {
         }
 
         Integer moneyOfVisitor = visitor.getMoney();
-        Integer prieceOfParkTicket = park.getPriceOfTicket();
+        Integer priceOfParkTicket = park.getPriceOfTicket();
 
-        if (moneyOfVisitor < prieceOfParkTicket) {
+        if (moneyOfVisitor < priceOfParkTicket) {
             throw new NotEnoughMoneyException("ERROR: The " + visitor.getName() + " have" + moneyOfVisitor
-                    + " money, but the price of park ticket cost " + prieceOfParkTicket + ".");
+                    + " money, but the price of park ticket cost " + priceOfParkTicket + ".");
         }
 
         visitor.setEntryDate();
-        visitor.setMoney(moneyOfVisitor - prieceOfParkTicket);
+        visitor.setMoney(moneyOfVisitor - priceOfParkTicket);
         visitor.setIsActive(true);
         visitor.setPark(park);
     }
 
-    public void exitFromPark(Long ifOfVisitor, Long idOfPark){
+    public void exitFromPark(Long ifOfVisitor, Long idOfPark) {
         Visitor visitor = visitorFacade.getVisitor(ifOfVisitor);
         parkFacade.getPark(idOfPark);
         if (!visitor.isIsActive()) {
@@ -78,7 +78,7 @@ public class VisitorService {
 
     }
 
-    public void boardToMachine(Long idOfVisitor, Long idOfMachine){
+    public void boardToMachine(Long idOfVisitor, Long idOfMachine) {
         Visitor visitor = visitorFacade.getVisitor(idOfVisitor);
         Machine machine = machineFacade.getMachine(idOfMachine);
         if (!visitor.isIsActive()) {
@@ -95,11 +95,19 @@ public class VisitorService {
         Integer altOfVisitor = visitor.getAge();
         Integer allowedAge = machine.getMinimumAge();
         if (altOfVisitor < allowedAge) {
-            throw new IllegalArgumentException("The visitor(" + altOfVisitor + " old) isn't old enough");
+            throw new IllegalArgumentException("The visitor(" + altOfVisitor + " old) isn't enough old");
         }
 
         if (machine.isFull()) {
             throw new NotEnoughAreaException("The machine haven't enough place");
+        }
+
+        if (visitor.getState() == VisitorState.ON_MACHINE) {
+            throw new IllegalArgumentException("The visitor is already on the board");
+        }
+
+        if (machine.getId() != visitor.getPark().getId()) {
+            throw new IllegalArgumentException("The machine isn't in the park, where the visitor are logged");
 
         }
 
@@ -129,22 +137,25 @@ public class VisitorService {
         guestBook.setEntryDate(Calendar.getInstance());
         guestBook.setParkId(park);
         guestBook.setVisitorId(visitor);
-        guestBookFacade.addGuestBook(guestBook);
+        guestBookFacade.create(guestBook);
 
         return "Thank the feedback";
     }
 
-    public Integer deleteVisitor(Long idOfVisitor) {
+    public void deleteVisitor(Long idOfVisitor) {
         Visitor visitor = visitorFacade.getVisitor(idOfVisitor);
         visitorFacade.remove(visitor);
-        return 1;
     }
 
-    public Integer updateVisitor(Long idOfVisitor, Visitor visitor) {
+    public Visitor updateVisitor(Long idOfVisitor, Visitor visitor) {
         visitorFacade.getVisitor(idOfVisitor);
         visitor.setId(idOfVisitor);
-        visitorFacade.merge(visitor);
-        return 1;
+        visitorFacade.update(visitor);
+        return visitor;
+    }
+
+    public Visitor getVisitorById(Long idOfVisitor) {
+        return visitorFacade.getVisitor(idOfVisitor);
     }
 
 }
